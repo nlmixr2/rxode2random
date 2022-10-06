@@ -65,6 +65,11 @@
 #define _cbindOme _rxode2random_cbindOme
 #define _vecDF _rxode2random_vecDF
 #define convertId_ rxode2random_convertId_
+#define qtest _rxode2random_qtest
+#define qstrictS _rxode2random_qstrictS
+#define qstrictSn _rxode2random_qstrictSn
+#define qstrictSdn _rxode2random_qstrictSdn
+#define qassertS _rxode2random_qassertS
 #endif // _isrxode2random_
 
 #endif

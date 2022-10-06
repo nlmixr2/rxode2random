@@ -7,8 +7,6 @@
 
 using namespace Rcpp;
 
-Function getRxFn(std::string name);
-
 Rcpp::Function loadNamespaceCheckmate("loadNamespace", R_BaseNamespace);
 Rcpp::Environment checkmateNs;
 bool loadCheckmateNs = false;
@@ -20,7 +18,7 @@ static void loadCheckmate() {
   }
 }
 
-bool qtest(SEXP in, const char *test) {
+extern "C" bool qtest(SEXP in, const char *test) {
   loadCheckmate();
   Rcpp::Function _qtest = as<Function>(checkmateNs["qtest"]);
   SEXP testSXP = PROTECT(Rf_allocVector(STRSXP, 1));
@@ -31,7 +29,7 @@ bool qtest(SEXP in, const char *test) {
 }
 
 // Modified by Matt
-SEXP qstrictS(SEXP nn, const char *what) {
+extern "C" SEXP qstrictS(SEXP nn, const char *what) {
   BEGIN_RCPP
   R_xlen_t pos = find_missing_string(nn);
   if (pos > 0) {
@@ -52,14 +50,14 @@ SEXP qstrictS(SEXP nn, const char *what) {
   END_RCPP
 }
 
-SEXP qstrictSn(SEXP x_, const char *what) {
+extern "C" SEXP qstrictSn(SEXP x_, const char *what) {
   BEGIN_RCPP
   RObject x  = as<RObject>(x_);
   return qstrictS(as<SEXP>(x.attr("names")), what);
   END_RCPP
 }
 
-SEXP qstrictSdn(SEXP x_, const char *what) {
+extern "C" SEXP qstrictSdn(SEXP x_, const char *what) {
   BEGIN_RCPP
   RObject x  = as<RObject>(x_);
   List dimnames = x.attr("dimnames");
@@ -76,7 +74,7 @@ SEXP qstrictSdn(SEXP x_, const char *what) {
   END_RCPP
 }
 
-SEXP qassertS(SEXP in, const char *test, const char *what){
+extern "C" SEXP qassertS(SEXP in, const char *test, const char *what) {
   BEGIN_RCPP
   if (!qtest(as<SEXP>(in), test)) {
     char ch1 = tolower(test[0]);

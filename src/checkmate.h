@@ -3,12 +3,12 @@
 #include "../inst/include/rxode2random.h"
 
 #if defined(__cplusplus)
+extern "C" {
 SEXP qassertS(SEXP in, const char *test, const char *what);
 bool qtest(SEXP in, const char *test);
 SEXP qstrictS(SEXP nn, const char *what);
 SEXP qstrictSn(SEXP x_, const char *what);
 SEXP qstrictSdn(SEXP x_, const char *what);
-extern "C" {
 #endif
   
   R_xlen_t check_strict_names(SEXP x);

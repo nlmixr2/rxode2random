@@ -57,6 +57,13 @@ SEXP _rxode2random_cbindOme(SEXP, SEXP, SEXP);
 SEXP _rxode2random_vecDF(SEXP, SEXP);
 SEXP _rxode2random_convertId_(SEXP);
 
+bool _rxode2random_qtest(SEXP in, const char *test);
+SEXP _rxode2random_qstrictS(SEXP nn, const char *what);
+SEXP _rxode2random_qstrictSn(SEXP x_, const char *what);
+SEXP _rxode2random_qstrictSdn(SEXP x_, const char *what);
+
+SEXP _rxode2random_qassertS(SEXP in, const char *test, const char *what);
+
 void R_init_rxode2random(DllInfo *info){
   R_CallMethodDef callMethods[]  = {
     {"_rxode2random_convertId_", (DL_FUNC) &_rxode2random_convertId_, 1},
@@ -106,6 +113,12 @@ void R_init_rxode2random(DllInfo *info){
     {NULL, NULL, 0} 
   };
   // C callable to assign environments.
+  R_RegisterCCallable("rxode2random", "_rxode2random_qtest", (DL_FUNC) &_rxode2random_qtest);
+  R_RegisterCCallable("rxode2random", "_rxode2random_qstrictS", (DL_FUNC) &_rxode2random_qstrictS);
+  R_RegisterCCallable("rxode2random", "_rxode2random_qstrictSn", (DL_FUNC) &_rxode2random_qstrictSn);
+  R_RegisterCCallable("rxode2random", "_rxode2random_qstrictSdn", (DL_FUNC) &_rxode2random_qstrictSdn);
+  R_RegisterCCallable("rxode2random", "_rxode2random_qassertS", (DL_FUNC) &_rxode2random_qassertS);
+  
   R_RegisterCCallable("rxode2random", "simeps", (DL_FUNC) &simeps);
   R_RegisterCCallable("rxode2random", "simeta", (DL_FUNC) &simeta);
   
@@ -145,6 +158,7 @@ void R_init_rxode2random(DllInfo *info){
   R_RegisterCCallable("rxode2random", "rit_", (DL_FUNC) &rit_);
   R_RegisterCCallable("rxode2random", "riunif", (DL_FUNC) &riunif);
   R_RegisterCCallable("rxode2random", "riweibull", (DL_FUNC) &riweibull);
+  R_RegisterCCallable("rxode2random", "_rxode2random_vecDF", (DL_FUNC) &_rxode2random_vecDF, 2});
 
   // log likelihoods used in calculations
   static const R_CMethodDef cMethods[] = {
