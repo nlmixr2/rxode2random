@@ -17,8 +17,9 @@ BugReports: https://github.com/nlmixr2/rxode2random/issues/
 Depends:
     R (>= 4.0.0)
 Imports:
-    utils,
-    Rcpp
+    stats,
+    Rcpp,
+    checkmate
 Suggests:
     testthat (>= 3.0.0)
 LinkingTo:

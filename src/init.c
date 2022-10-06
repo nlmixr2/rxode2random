@@ -53,9 +53,15 @@ SEXP _rxode2random_rxGetSeed(void);
 SEXP _rxode2random_phi(SEXP q);
 
 SEXP _rxode2random_rxSetSeed(SEXP);
+SEXP _rxode2random_cbindOme(SEXP, SEXP, SEXP);
+SEXP _rxode2random_vecDF(SEXP, SEXP);
+SEXP _rxode2random_convertId_(SEXP);
 
 void R_init_rxode2random(DllInfo *info){
   R_CallMethodDef callMethods[]  = {
+    {"_rxode2random_convertId_", (DL_FUNC) &_rxode2random_convertId_, 1},
+    {"_rxode2random_vecDF", (DL_FUNC) &_rxode2random_vecDF, 2},
+    {"_rxode2random_cbindOme", (DL_FUNC) &_rxode2random_cbindOme, 3},
     {"_rxode2random_rxSetSeed", (DL_FUNC) &_rxode2random_rxSetSeed, 1},
     {"_rxode2random_rinvchisq", (DL_FUNC) &_rxode2random_rinvchisq, 3},
     {"_rxode2random_rLKJ1", (DL_FUNC) &_rxode2random_rLKJ1, 3},

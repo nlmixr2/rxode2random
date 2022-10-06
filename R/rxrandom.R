@@ -23,6 +23,7 @@ rxnorm <- function(mean = 0, sd = 1, n = 1L, ncores = 1L) {
 #' @return normal random number deviates
 #' 
 #' @importFrom Rcpp sourceCpp
+#' @importFrom stats setNames
 #' @useDynLib rxode2random, .registration=TRUE
 #' @examples
 #' ## Use threefry engine

@@ -61,6 +61,10 @@
 #define rxExpandNestingSexp rxode2random_rxExpandNestingSexp
 #define rxSeedEng rxode2random_rxSeedEng
 #define _rxSetSeed rxode2random_rxSetSeed
+#define rxGetSeed rxode2random_rxGetSeed
+#define _cbindOme _rxode2random_cbindOme
+#define _vecDF _rxode2random_vecDF
+#define convertId_ rxode2random_convertId_
 #endif // _isrxode2random_
 
 #endif
