@@ -50,9 +50,13 @@ SEXP _rxode2random_rxordSelect(SEXP uSEXP, SEXP csSEXP);
 SEXP _rxode2random_rxrandnV(SEXP nrowSEXP, SEXP ncolSEXP);
 SEXP _rxode2random_rxnormV_(SEXP meanSEXP, SEXP sdSEXP, SEXP nSEXP, SEXP ncoresSEXP);
 SEXP _rxode2random_rxGetSeed(void);
+SEXP _rxode2random_phi(SEXP q);
+
+SEXP _rxode2random_rxSetSeed(SEXP);
 
 void R_init_rxode2random(DllInfo *info){
   R_CallMethodDef callMethods[]  = {
+    {"_rxode2random_rxSetSeed", (DL_FUNC) &_rxode2random_rxSetSeed, 1},
     {"_rxode2random_rinvchisq", (DL_FUNC) &_rxode2random_rinvchisq, 3},
     {"_rxode2random_rLKJ1", (DL_FUNC) &_rxode2random_rLKJ1, 3},
     {"_rxode2random_rLKJcv1", (DL_FUNC) &_rxode2random_rLKJcv1, 2},
@@ -92,9 +96,49 @@ void R_init_rxode2random(DllInfo *info){
     {"_rxode2random_rxrandnV", (DL_FUNC) &_rxode2random_rxrandnV, 2},
     {"_rxode2random_rxnormV_", (DL_FUNC) &_rxode2random_rxnormV_, 4},
     {"_rxode2random_rxGetSeed", (DL_FUNC) &_rxode2random_rxGetSeed, 0},
+    {"_rxode2random_phi", (DL_FUNC) &_rxode2random_phi, 1},
     {NULL, NULL, 0} 
   };
   // C callable to assign environments.
+  R_RegisterCCallable("rxode2random", "simeps", (DL_FUNC) &simeps);
+  R_RegisterCCallable("rxode2random", "simeta", (DL_FUNC) &simeta);
+  
+  R_RegisterCCallable("rxode2random", "phi", (DL_FUNC) &phi);
+  
+  R_RegisterCCallable("rxode2random", "rxnormV", (DL_FUNC) &rxnormV);
+  R_RegisterCCallable("rxode2random", "rinormV", (DL_FUNC) &rinormV);
+  
+  R_RegisterCCallable("rxode2random", "rxgamma", (DL_FUNC) &rxgamma);
+  R_RegisterCCallable("rxode2random", "rxbeta", (DL_FUNC) &rxbeta);
+  R_RegisterCCallable("rxode2random", "rxbinom", (DL_FUNC) &rxbinom);
+  R_RegisterCCallable("rxode2random", "rxnbinomMu", (DL_FUNC) &rxnbinomMu);
+  R_RegisterCCallable("rxode2random", "rxnbinom", (DL_FUNC) &rxnbinom);
+  R_RegisterCCallable("rxode2random", "rxcauchy", (DL_FUNC) &rxcauchy);
+  R_RegisterCCallable("rxode2random", "rxchisq", (DL_FUNC) &rxchisq);
+  R_RegisterCCallable("rxode2random", "rxexp", (DL_FUNC) &rxexp);
+  R_RegisterCCallable("rxode2random", "rxf", (DL_FUNC) &rxf);
+  R_RegisterCCallable("rxode2random", "rxgeom", (DL_FUNC) &rxgeom);
+  R_RegisterCCallable("rxode2random", "rxnorm", (DL_FUNC) &rxnorm);
+  R_RegisterCCallable("rxode2random", "rxpois", (DL_FUNC) &rxpois);
+  R_RegisterCCallable("rxode2random", "rxt_", (DL_FUNC) &rxt_);
+  R_RegisterCCallable("rxode2random", "rxunif", (DL_FUNC) &rxunif);
+  R_RegisterCCallable("rxode2random", "rxweibull", (DL_FUNC) &rxweibull);
+
+  R_RegisterCCallable("rxode2random", "rigamma", (DL_FUNC) &rigamma);
+  R_RegisterCCallable("rxode2random", "ribeta", (DL_FUNC) &ribeta);
+  R_RegisterCCallable("rxode2random", "ribinom", (DL_FUNC) &ribinom);
+  R_RegisterCCallable("rxode2random", "rinbinomMu", (DL_FUNC) &rinbinomMu);
+  R_RegisterCCallable("rxode2random", "rinbinom", (DL_FUNC) &rinbinom);
+  R_RegisterCCallable("rxode2random", "ricauchy", (DL_FUNC) &ricauchy);
+  R_RegisterCCallable("rxode2random", "richisq", (DL_FUNC) &richisq);
+  R_RegisterCCallable("rxode2random", "riexp", (DL_FUNC) &riexp);
+  R_RegisterCCallable("rxode2random", "rif", (DL_FUNC) &rif);
+  R_RegisterCCallable("rxode2random", "rigeom", (DL_FUNC) &rigeom);
+  R_RegisterCCallable("rxode2random", "rinorm", (DL_FUNC) &rinorm);
+  R_RegisterCCallable("rxode2random", "ripois", (DL_FUNC) &ripois);
+  R_RegisterCCallable("rxode2random", "rit_", (DL_FUNC) &rit_);
+  R_RegisterCCallable("rxode2random", "riunif", (DL_FUNC) &riunif);
+  R_RegisterCCallable("rxode2random", "riweibull", (DL_FUNC) &riweibull);
 
   // log likelihoods used in calculations
   static const R_CMethodDef cMethods[] = {

@@ -125,7 +125,7 @@ double phi(double q) {
   return pnorm(q, 0.0, 1.0, 1, 0);
 }
 
-SEXP _phi(SEXP q) {
+SEXP _rxode2random_phi(SEXP q) {
   int type = TYPEOF(q);
   SEXP ret;
   int pro = 0;

@@ -59,6 +59,8 @@
 #define rxModelVars_ rxode2random_rxModelVars_
 #define chin rxode2random_chin
 #define rxExpandNestingSexp rxode2random_rxExpandNestingSexp
+#define rxSeedEng rxode2random_rxSeedEng
+#define _rxSetSeed rxode2random_rxSetSeed
 #endif // _isrxode2random_
 
 #endif

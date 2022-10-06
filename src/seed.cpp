@@ -2,12 +2,13 @@
 #define STRICT_R_HEADERS
 #include "rxomp.h"
 #define min2( a , b )  ( (a) < (b) ? (a) : (b) )
+#include "../inst/include/rxode2random.h"
 #include <RcppArmadillo.h>
 #include <rxode2parse.h>
 #include <R.h>
 #ifdef ENABLE_NLS
 #include <libintl.h>
-#define _(String) dgettext ("rxode2", String)
+#define _(String) dgettext ("rxode2parse", String)
 /* replace pkg as appropriate */
 #else
 #define _(String) (String)
@@ -19,7 +20,7 @@ bool useRxSeed = false;
 
 uint32_t rxSeed = 0;
 
-extern "C" SEXP _rxSetSeed(SEXP intIn) {
+extern "C" SEXP _rxode2random_rxSetSeed(SEXP intIn) {
   int type = TYPEOF(intIn);
   if (Rf_length(intIn) != 1) {
     Rf_errorcall(R_NilValue, _("'seed' must be an integer of length 1"));

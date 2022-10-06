@@ -38,6 +38,9 @@ extern "C" {
   double ribeta(rx_solving_options_ind* ind, int id, double shape1, double shape2);
   double rinormV(rx_solving_options_ind* ind, int id, double mean, double sd);
 
+  void simeta(int id);
+  void simeps(int id);
+  double phi(double qn);
 
 #if defined(__cplusplus)
 }
