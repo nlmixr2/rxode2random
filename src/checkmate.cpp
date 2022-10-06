@@ -1,6 +1,7 @@
 //#undef NDEBUG
 #define USE_FC_LEN_T
 #define STRICT_R_HEADERS
+#include "../inst/include/rxode2random.h"
 #include <Rcpp.h>
 #include "checkmate.h"
 

@@ -1,5 +1,8 @@
 #ifndef _rxrandom_defines_h__
 #define _rxrandom_defines_h__
+
+#ifdef _isrxode2random_
+
 #define rxbinom rxode2random_rxbinom
 #define rxnbinomMu rxode2random_rxnbinomMu
 #define rxnbinom rxode2random_rxnbinom
@@ -37,11 +40,25 @@
 #define qstrictS rxode2random_qstrictS
 #define qstrictSn rxode2random_qstrictSn
 #define qstrictSdn rxode2random_qstrictSdn
-#define check_strict_names rxode2random_check_strict_names
-#define find_missing_string rxode2random_find_missing_string
 #define qstrict rxode2random_qstrict
-#define rxIs rxode2random_rxIs
 #define rx_global rxode2random_rx_global
 #define op_global rxode2random_op_global
+#define getLowerVec rxode2random_getLowerVec
+#define getUpperVec rxode2random_getUpperVec
+#define getArmaMat  rxode2random_getArmaMat
+#define getLowerVecSexp rxode2random_getLowerVecSexp
+#define getUpperVecSexp rxode2random_getUpperVecSexp
+#define getArmaMatSexp  rxode2random_getArmaMatSexp
+#define setZeroMatrix rxode2random_setZeroMatrix
+#define rxSolveFree rxode2random_rxSolveFree
+#define etTransSexp rxode2random_etTransSexp
+#define _vecDF rxode2random_vecDF
+#define rxModelsAssign roxde2random_rxModelsAssign
+#define rxRmvnSEXP rxode2random_rxRmvnSEXP
+#define _cbindOme rxode2random_cbindOme
+#define rxModelVars_ rxode2random_rxModelVars_
+#define chin rxode2random_chin
+#define rxExpandNestingSexp rxode2random_rxExpandNestingSexp
+#endif // _isrxode2random_
 
 #endif

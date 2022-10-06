@@ -25,7 +25,29 @@ using namespace arma;
 extern "C" {
   rx_solve rxode2random_rx_global;
   rx_solving_options rxode2random_op_global;
+
+  typedef SEXP (*getLowerVec_t)(int type, rx_solve* rx);
+  typedef SEXP (*getUpperVec_t)(int type, rx_solve* rx);
+  typedef SEXP (*getArmaMat_t)(int type, int csim, rx_solve* rx);
+
+  
+  getLowerVec_t getLowerVecSexp;
+  getUpperVec_t getUpperVecSexp;
+  getArmaMat_t getArmaMatSexp;
 }
+
+
+arma::vec getLowerVec(int type, rx_solve* rx) {
+  return as<arma::vec>(getLowerVecSexp(type, rx));
+}
+arma::vec getUpperVec(int type, rx_solve* rx) {
+  return as<arma::vec>(getUpperVecSexp(type, rx));
+  
+}
+arma::mat getArmaMat(int type, int csim, rx_solve* rx) {
+  return as<arma::mat>(getArmaMatSexp(type, csim, rx));
+}
+
 
 
 //[[Rcpp::export]]
@@ -1512,10 +1534,6 @@ void rxRmvnA(arma::mat & A_, arma::rowvec & mu, arma::mat &sigma,
     rxRmvn2_(A_, mu, sigma, ncores, isChol);
   }
 }
-
-arma::vec getLowerVec(int type, rx_solve* rx);
-arma::vec getUpperVec(int type, rx_solve* rx);
-arma::mat getArmaMat(int type, int csim, rx_solve* rx);
 
 void simvar(double *out, int type, int csim, rx_solve* rx) {
   int n = 0;

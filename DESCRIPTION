@@ -3,7 +3,7 @@ Title: Random Number Generation Functions for 'rxode2'
 Version: 2.0.9
 Authors@R: c(
     person("Matthew L.", "Fidler", , "matthew.fidler@gmail.com", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0001-8538-6691")),
+           comment = c(ORCIDf = "0000-0001-8538-6691")),
     person("Wenping", "Wang", , "wwang8198@gmail.com", role = "ctb")
   )
 Description: Provides the random number generation (in parallel) needed for

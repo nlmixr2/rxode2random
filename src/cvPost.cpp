@@ -25,7 +25,50 @@ extern "C"{
   isLotri_type isLotri;
   typedef SEXP (*lotriMaxNu_type) (SEXP);
   lotriMaxNu_type lotriMaxNu;
+  typedef SEXP (*rxSolveFreeSexp_t)(void);
+  rxSolveFreeSexp_t rxSolveFree;
+  typedef void (*setZeroMatrix_t)(int which);
+  setZeroMatrix_t  setZeroMatrix;
+  typedef SEXP (*etTrans_t)(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+  etTrans_t etTransSexp;
+  typedef void (*rxModelsAssignC_t)(const char* str, SEXP assign);
+  rxModelsAssignC_t rxModelsAssign;
+  typedef SEXP (*rxModelVars_SEXP_t)(SEXP);
+  rxModelVars_SEXP_t rxModelVars_;
+  typedef SEXP (*rxExpandNestingSexp_t)(SEXP, SEXP, SEXP);
+  rxExpandNestingSexp_t rxExpandNestingSexp;
+  typedef SEXP (*chin_t)(SEXP x, SEXP table);
+  chin_t chin;
 }
+
+List etTrans(List inData, const RObject &obj, bool addCmt=false,
+             bool dropUnits=false, bool allTimeVar=false,
+             bool keepDosingOnly=false, Nullable<LogicalVector> combineDvid=R_NilValue,
+             CharacterVector keep = CharacterVector(0)) {
+  return as<List>(etTransSexp(wrap(inData), wrap(obj), wrap(addCmt), wrap(dropUnits), wrap(allTimeVar),
+                              wrap(keepDosingOnly), wrap(combineDvid),wrap(keep = CharacterVector(0))));
+}
+
+
+
+SEXP nestingInfo_(SEXP omega, List data);
+
+List rxExpandNesting(const RObject& obj, List& nestingInfo,
+                     bool compile=false) {
+  return as<List>(rxExpandNestingSexp(wrap(obj), wrap(nestingInfo), wrap(compile)));
+}
+
+extern "C" SEXP _cbindOme(SEXP et_, SEXP mat_, SEXP n_);
+
+extern "C" SEXP _vecDF(SEXP cv, SEXP n_);
+SEXP convertId_(SEXP x);
+
+SEXP rxRmvnSEXP(SEXP nS, SEXP muS, SEXP sigmaS,
+                SEXP lowerS, SEXP upperS, SEXP ncoresS, SEXP isCholS,
+                SEXP keepNamesS,
+                SEXP aS, SEXP tolS, SEXP nlTolS, SEXP nlMaxiterS);
+
+
 
 bool gotLotriMat=false;
 
@@ -44,8 +87,6 @@ static inline void setupLotri() {
 
 using namespace Rcpp;
 using namespace arma;
-
-LogicalVector rxSolveFree();
 
 arma::mat rwish5(double nu, int p){
   // GetRNGstate();
@@ -505,15 +546,7 @@ SEXP cvPost_(SEXP nuS, SEXP omegaS, SEXP nS, SEXP omegaIsCholS,
   return R_NilValue;
 }
 
-extern "C" SEXP _vecDF(SEXP cv, SEXP n_);
-void rxModelsAssign(std::string str, SEXP assign);
 
-SEXP rxRmvnSEXP(SEXP nS, SEXP muS, SEXP sigmaS,
-		SEXP lowerS, SEXP upperS, SEXP ncoresS, SEXP isCholS,
-		SEXP keepNamesS,
-		SEXP aS, SEXP tolS, SEXP nlTolS, SEXP nlMaxiterS);
-
-extern "C" void setZeroMatrix(int which);
 
 //[[Rcpp::export]]
 SEXP expandTheta_(SEXP thetaS, SEXP thetaMatS,
@@ -633,18 +666,6 @@ SEXP expandTheta_(SEXP thetaS, SEXP thetaMatS,
   return as<SEXP>(ret);
 }
 
-Function getRxFn(std::string name);
-
-SEXP chin(SEXP x, SEXP table);
-
-SEXP nestingInfo_(SEXP omega, List data);
-
-List rxExpandNesting(const RObject& obj, List& nestingInfo,
-		     bool compile=false);
-
-List rxModelVars_(const RObject &obj);
-
-extern "C" SEXP _cbindOme(SEXP et_, SEXP mat_, SEXP n_);
 
 static inline int getMethodInt(std::string& methodStr, CharacterVector& allNames, SEXP et) {
   int methodInt=1;
@@ -678,11 +699,6 @@ static inline int getMethodInt(std::string& methodStr, CharacterVector& allNames
   }
   return methodInt;
 }
-
-List etTrans(List inData, const RObject &obj, bool addCmt=false,
-	     bool dropUnits=false, bool allTimeVar=false,
-	     bool keepDosingOnly=false, Nullable<LogicalVector> combineDvid=R_NilValue,
-	     CharacterVector keep = CharacterVector(0));
 
 //[[Rcpp::export]]
 SEXP expandPars_(SEXP objectS, SEXP paramsS, SEXP eventsS, SEXP controlS) {
@@ -1042,8 +1058,6 @@ SEXP expandPars_(SEXP objectS, SEXP paramsS, SEXP eventsS, SEXP controlS) {
   UNPROTECT(pro);
   return et;
 }
-
-SEXP convertId_(SEXP x);
 
 int get_sexp_uniqueL( SEXP s );
 int factor2( IntegerVector col, IntegerVector id) {
