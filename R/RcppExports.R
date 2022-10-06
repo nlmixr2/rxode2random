@@ -17,7 +17,7 @@
 #' rinvchisq(2, 4, 2) ## Scale = 2, degrees of freedom = 4
 #' @export
 rinvchisq <- function(n = 1L, nu = 1.0, scale = 1) {
-    .Call('_rxode2random_rinvchisq', PACKAGE = 'rxode2random', n, nu, scale)
+    .Call(`_rxode2random_rinvchisq`, n, nu, scale)
 }
 
 #' One correlation sample from the LKJ distribution
@@ -37,15 +37,15 @@ rinvchisq <- function(n = 1L, nu = 1.0, scale = 1) {
 #' @export
 #' @keywords internal
 rLKJ1 <- function(d, eta = 1.0, cholesky = FALSE) {
-    .Call('_rxode2random_rLKJ1', PACKAGE = 'rxode2random', d, eta, cholesky)
+    .Call(`_rxode2random_rLKJ1`, d, eta, cholesky)
 }
 
 rLKJcv1 <- function(sd, eta = 1.0) {
-    .Call('_rxode2random_rLKJcv1', PACKAGE = 'rxode2random', sd, eta)
+    .Call(`_rxode2random_rLKJcv1`, sd, eta)
 }
 
 rLKJcvLsd1 <- function(logSd, logSdSD, eta = 1.0) {
-    .Call('_rxode2random_rLKJcvLsd1', PACKAGE = 'rxode2random', logSd, logSdSD, eta)
+    .Call(`_rxode2random_rLKJcvLsd1`, logSd, logSdSD, eta)
 }
 
 #' One correlation sample from the Inverse Wishart distribution
@@ -65,139 +65,139 @@ rLKJcvLsd1 <- function(logSd, logSdSD, eta = 1.0) {
 #' @keywords internal
 #' @export
 invWR1d <- function(d, nu, omegaIsChol = FALSE) {
-    .Call('_rxode2random_invWR1d', PACKAGE = 'rxode2random', d, nu, omegaIsChol)
+    .Call(`_rxode2random_invWR1d`, d, nu, omegaIsChol)
 }
 
 rcvC1 <- function(sdEst, nu = 3.0, diagXformType = 1L, rType = 1L, returnChol = FALSE) {
-    .Call('_rxode2random_rcvC1', PACKAGE = 'rxode2random', sdEst, nu, diagXformType, rType, returnChol)
+    .Call(`_rxode2random_rcvC1`, sdEst, nu, diagXformType, rType, returnChol)
 }
 
 cvPost_ <- function(nuS, omegaS, nS, omegaIsCholS, returnCholS, typeS, diagXformTypeS) {
-    .Call('_rxode2random_cvPost_', PACKAGE = 'rxode2random', nuS, omegaS, nS, omegaIsCholS, returnCholS, typeS, diagXformTypeS)
+    .Call(`_rxode2random_cvPost_`, nuS, omegaS, nS, omegaIsCholS, returnCholS, typeS, diagXformTypeS)
 }
 
 expandTheta_ <- function(thetaS, thetaMatS, thetaLowerS, thetaUpperS, nStudS, nCoresRVS) {
-    .Call('_rxode2random_expandTheta_', PACKAGE = 'rxode2random', thetaS, thetaMatS, thetaLowerS, thetaUpperS, nStudS, nCoresRVS)
+    .Call(`_rxode2random_expandTheta_`, thetaS, thetaMatS, thetaLowerS, thetaUpperS, nStudS, nCoresRVS)
 }
 
 expandPars_ <- function(objectS, paramsS, eventsS, controlS) {
-    .Call('_rxode2random_expandPars_', PACKAGE = 'rxode2random', objectS, paramsS, eventsS, controlS)
+    .Call(`_rxode2random_expandPars_`, objectS, paramsS, eventsS, controlS)
 }
 
 nestingInfo_ <- function(omega, data) {
-    .Call('_rxode2random_nestingInfo_', PACKAGE = 'rxode2random', omega, data)
+    .Call(`_rxode2random_nestingInfo_`, omega, data)
 }
 
 rxRmvn_ <- function(A_, mu, sigma, ncores = 1L, isChol = FALSE) {
-    .Call('_rxode2random_rxRmvn_', PACKAGE = 'rxode2random', A_, mu, sigma, ncores, isChol)
+    .Call(`_rxode2random_rxRmvn_`, A_, mu, sigma, ncores, isChol)
 }
 
 rxMvnrnd <- function(n, L, l, u, mu, a = 0.4, tol = 2.05) {
-    .Call('_rxode2random_rxMvnrnd', PACKAGE = 'rxode2random', n, L, l, u, mu, a, tol)
+    .Call(`_rxode2random_rxMvnrnd`, n, L, l, u, mu, a, tol)
 }
 
 rxCholperm <- function(Sig, l, u, eps = 1e-10) {
-    .Call('_rxode2random_rxCholperm', PACKAGE = 'rxode2random', Sig, l, u, eps)
+    .Call(`_rxode2random_rxCholperm`, Sig, l, u, eps)
 }
 
 rxGradpsi <- function(y, L, l, u) {
-    .Call('_rxode2random_rxGradpsi', PACKAGE = 'rxode2random', y, L, l, u)
+    .Call(`_rxode2random_rxGradpsi`, y, L, l, u)
 }
 
 rxNleq <- function(l, u, L) {
-    .Call('_rxode2random_rxNleq', PACKAGE = 'rxode2random', l, u, L)
+    .Call(`_rxode2random_rxNleq`, l, u, L)
 }
 
 rxMvrandn_ <- function(A_, mu, sigma, lower, upper, ncores = 1L, a = 0.4, tol = 2.05, nlTol = 1e-10, nlMaxiter = 100L) {
-    .Call('_rxode2random_rxMvrandn_', PACKAGE = 'rxode2random', A_, mu, sigma, lower, upper, ncores, a, tol, nlTol, nlMaxiter)
+    .Call(`_rxode2random_rxMvrandn_`, A_, mu, sigma, lower, upper, ncores, a, tol, nlTol, nlMaxiter)
 }
 
 rxSeedEng <- function(ncores = 1L) {
-    .Call('_rxode2random_rxSeedEng', PACKAGE = 'rxode2random', ncores)
+    .Call(`_rxode2random_rxSeedEng`, ncores)
 }
 
 rxnbinomMu_ <- function(size, mu, n, ncores) {
-    .Call('_rxode2random_rxnbinomMu_', PACKAGE = 'rxode2random', size, mu, n, ncores)
+    .Call(`_rxode2random_rxnbinomMu_`, size, mu, n, ncores)
 }
 
 rxnbinom_ <- function(size, prob, n, ncores) {
-    .Call('_rxode2random_rxnbinom_', PACKAGE = 'rxode2random', size, prob, n, ncores)
+    .Call(`_rxode2random_rxnbinom_`, size, prob, n, ncores)
 }
 
 rxbinom_ <- function(n0, prob, n, ncores) {
-    .Call('_rxode2random_rxbinom_', PACKAGE = 'rxode2random', n0, prob, n, ncores)
+    .Call(`_rxode2random_rxbinom_`, n0, prob, n, ncores)
 }
 
 rxcauchy_ <- function(location, scale, n, ncores) {
-    .Call('_rxode2random_rxcauchy_', PACKAGE = 'rxode2random', location, scale, n, ncores)
+    .Call(`_rxode2random_rxcauchy_`, location, scale, n, ncores)
 }
 
 rxchisq_ <- function(df, n, ncores) {
-    .Call('_rxode2random_rxchisq_', PACKAGE = 'rxode2random', df, n, ncores)
+    .Call(`_rxode2random_rxchisq_`, df, n, ncores)
 }
 
 rxexp_ <- function(rate, n, ncores) {
-    .Call('_rxode2random_rxexp_', PACKAGE = 'rxode2random', rate, n, ncores)
+    .Call(`_rxode2random_rxexp_`, rate, n, ncores)
 }
 
 rxf_ <- function(df1, df2, n, ncores) {
-    .Call('_rxode2random_rxf_', PACKAGE = 'rxode2random', df1, df2, n, ncores)
+    .Call(`_rxode2random_rxf_`, df1, df2, n, ncores)
 }
 
 rxgamma_ <- function(shape, rate, n, ncores) {
-    .Call('_rxode2random_rxgamma_', PACKAGE = 'rxode2random', shape, rate, n, ncores)
+    .Call(`_rxode2random_rxgamma_`, shape, rate, n, ncores)
 }
 
 rxbeta_ <- function(shape1, shape2, n, ncores) {
-    .Call('_rxode2random_rxbeta_', PACKAGE = 'rxode2random', shape1, shape2, n, ncores)
+    .Call(`_rxode2random_rxbeta_`, shape1, shape2, n, ncores)
 }
 
 rxgeom_ <- function(prob, n, ncores) {
-    .Call('_rxode2random_rxgeom_', PACKAGE = 'rxode2random', prob, n, ncores)
+    .Call(`_rxode2random_rxgeom_`, prob, n, ncores)
 }
 
 rxnorm_ <- function(mean, sd, n, ncores) {
-    .Call('_rxode2random_rxnorm_', PACKAGE = 'rxode2random', mean, sd, n, ncores)
+    .Call(`_rxode2random_rxnorm_`, mean, sd, n, ncores)
 }
 
 rxpois_ <- function(lambda, n, ncores) {
-    .Call('_rxode2random_rxpois_', PACKAGE = 'rxode2random', lambda, n, ncores)
+    .Call(`_rxode2random_rxpois_`, lambda, n, ncores)
 }
 
 rxt__ <- function(df, n, ncores) {
-    .Call('_rxode2random_rxt__', PACKAGE = 'rxode2random', df, n, ncores)
+    .Call(`_rxode2random_rxt__`, df, n, ncores)
 }
 
 rxunif_ <- function(low, hi, n, ncores) {
-    .Call('_rxode2random_rxunif_', PACKAGE = 'rxode2random', low, hi, n, ncores)
+    .Call(`_rxode2random_rxunif_`, low, hi, n, ncores)
 }
 
 rxweibull_ <- function(shape, scale, n, ncores) {
-    .Call('_rxode2random_rxweibull_', PACKAGE = 'rxode2random', shape, scale, n, ncores)
+    .Call(`_rxode2random_rxweibull_`, shape, scale, n, ncores)
 }
 
 rxRmvn0 <- function(A_, mu, sigma, lower, upper, ncores = 1L, isChol = FALSE, a = 0.4, tol = 2.05, nlTol = 1e-10, nlMaxiter = 100L) {
-    .Call('_rxode2random_rxRmvn0', PACKAGE = 'rxode2random', A_, mu, sigma, lower, upper, ncores, isChol, a, tol, nlTol, nlMaxiter)
+    .Call(`_rxode2random_rxRmvn0`, A_, mu, sigma, lower, upper, ncores, isChol, a, tol, nlTol, nlMaxiter)
 }
 
 rxRmvnSEXP <- function(nS, muS, sigmaS, lowerS, upperS, ncoresS, isCholS, keepNamesS, aS, tolS, nlTolS, nlMaxiterS) {
-    .Call('_rxode2random_rxRmvnSEXP', PACKAGE = 'rxode2random', nS, muS, sigmaS, lowerS, upperS, ncoresS, isCholS, keepNamesS, aS, tolS, nlTolS, nlMaxiterS)
+    .Call(`_rxode2random_rxRmvnSEXP`, nS, muS, sigmaS, lowerS, upperS, ncoresS, isCholS, keepNamesS, aS, tolS, nlTolS, nlMaxiterS)
 }
 
 rpp_ <- function(nS, lambdaS, gammaS, probS, t0S, tmaxS, randomOrderS) {
-    .Call('_rxode2random_rpp_', PACKAGE = 'rxode2random', nS, lambdaS, gammaS, probS, t0S, tmaxS, randomOrderS)
+    .Call(`_rxode2random_rpp_`, nS, lambdaS, gammaS, probS, t0S, tmaxS, randomOrderS)
 }
 
 rxordSelect <- function(u, cs) {
-    .Call('_rxode2random_rxordSelect', PACKAGE = 'rxode2random', u, cs)
+    .Call(`_rxode2random_rxordSelect`, u, cs)
 }
 
 rxrandnV <- function(nrow, ncol) {
-    .Call('_rxode2random_rxrandnV', PACKAGE = 'rxode2random', nrow, ncol)
+    .Call(`_rxode2random_rxrandnV`, nrow, ncol)
 }
 
 rxnormV_ <- function(mean, sd, n, ncores) {
-    .Call('_rxode2random_rxnormV_', PACKAGE = 'rxode2random', mean, sd, n, ncores)
+    .Call(`_rxode2random_rxnormV_`, mean, sd, n, ncores)
 }
 
 #' Get the rxode2 seed
@@ -231,10 +231,6 @@ rxnormV_ <- function(mean, sd, n, ncores) {
 #' rxGetSeed()
 #'
 rxGetSeed <- function() {
-    .Call('_rxode2random_rxGetSeed', PACKAGE = 'rxode2random')
+    .Call(`_rxode2random_rxGetSeed`)
 }
 
-# Register entry points for exported C++ functions
-methods::setLoadAction(function(ns) {
-    .Call('_rxode2random_RcppExport_registerCCallable', PACKAGE = 'rxode2random')
-})

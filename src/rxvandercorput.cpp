@@ -1,11 +1,11 @@
 #define USE_FC_LEN_T
 #define STRICT_R_HEADERS
-// [[Rcpp::interfaces(r, cpp)]]
 //#undef NDEBUG
+#include "../inst/include/rxode2random.h"
 #include "rxomp.h"
 #define min2( a , b )  ( (a) < (b) ? (a) : (b) )
 #include <RcppArmadillo.h>
-#include "../inst/include/rxode2.h"
+#include <rxode2parse.h>
 #include <vandercorput.h>
 #include "seed.h"
 #include <R.h>

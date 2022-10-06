@@ -3,7 +3,7 @@
 #include "rxomp.h"
 #define min2( a , b )  ( (a) < (b) ? (a) : (b) )
 #include <RcppArmadillo.h>
-#include "../inst/include/rxode2.h"
+#include <rxode2parse.h>
 #include <R.h>
 #ifdef ENABLE_NLS
 #include <libintl.h>

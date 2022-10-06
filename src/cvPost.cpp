@@ -1,6 +1,7 @@
 //#undef NDEBUG
 #define USE_FC_LEN_T
 #define STRICT_R_HEADERS
+#include "../inst/include/rxode2random.h"
 #include <RcppArmadillo.h>
 #include <R.h>
 #include <threefry.h>
@@ -43,7 +44,6 @@ static inline void setupLotri() {
 
 using namespace Rcpp;
 using namespace arma;
-bool rxIs(const RObject &obj, std::string cls);
 
 LogicalVector rxSolveFree();
 
@@ -529,7 +529,7 @@ SEXP expandTheta_(SEXP thetaS, SEXP thetaMatS,
   if (Rf_isNull(thetaMatS)) {
     if (Rf_isMatrix(thetaS)) {
       return as<SEXP>(as<DataFrame>(thetaS));
-    } else if (rxIs(thetaS, "data.frame")) {
+    } else if (Rf_inherits(thetaS, "data.frame")) {
       return thetaS;
     } else {
       return _vecDF(thetaS, nStudS);
@@ -972,7 +972,7 @@ SEXP expandPars_(SEXP objectS, SEXP paramsS, SEXP eventsS, SEXP controlS) {
 			       false, false, true, R_NilValue,
 			       control[Rxc_keepF])); pro++;
       rxModelsAssign(".nestEvents", events);
-    } else if (!rxIs(events, "rxEtTrans")){
+    } else if (!Rf_inherits(events, "rxEtTrans")){
       events = PROTECT(etTrans(as<List>(events), nestObj,
 			       (INTEGER(mv[RxMv_flags])[RxMvFlag_hasCmt] == 1),
 			       false, false, true, R_NilValue,

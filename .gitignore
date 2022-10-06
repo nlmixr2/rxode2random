@@ -1,0 +1,6 @@
+/R/rxode2random_md5.R
+/src/Makevars
+/.RData
+/.Rhistory
+/src/*.o
+*.so

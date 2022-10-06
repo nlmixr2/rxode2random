@@ -1,5 +1,6 @@
 #ifndef __checkmate_H__
 #define __checkmate_H__
+#include "../inst/include/rxode2random.h"
 
 #if defined(__cplusplus)
 SEXP qassertS(SEXP in, const char *test, const char *what);

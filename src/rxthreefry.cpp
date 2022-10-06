@@ -1,7 +1,7 @@
 #define USE_FC_LEN_T
-// [[Rcpp::interfaces(r, cpp)]]
 //#undef NDEBUG
 #define STRICT_R_HEADERS
+#include "../inst/include/rxode2random.h"
 #include "rxomp.h"
 #define min2( a , b )  ( (a) < (b) ? (a) : (b) )
 #include <RcppArmadillo.h>
@@ -22,7 +22,11 @@ using namespace arma;
 #include "../inst/include/rxode2random_as.h"
 #include "threefry.h"
 
-extern rx_solving_options op_global;
+extern "C" {
+  rx_solve rxode2random_rx_global;
+  rx_solving_options rxode2random_op_global;
+}
+
 
 //[[Rcpp::export]]
 SEXP rxRmvn_(NumericMatrix A_, arma::rowvec mu, arma::mat sigma,
@@ -1530,7 +1534,7 @@ void simvar(double *out, int type, int csim, rx_solve* rx) {
   rxRmvnA(A, mu, sigma, lower, upper, 1, false, 0.4, 2.05, 1e-10, 100);
 }
 extern "C" void simeps(int id) {
-  rx_solve* rx = getRxSolve_();
+  rx_solve* rx = &rx_global;
   rx_solving_options_ind *ind = &(rx->subjects[id]);
   if (ind->inLhs == 1) { // only change while calculating the lhs
     // In this case the par_ptr will be updated with the new values, but they are out of order
@@ -1549,7 +1553,7 @@ extern "C" void simeps(int id) {
 
 
 extern "C" void simeta(int id) {
-  rx_solve* rx = getRxSolve_();
+  rx_solve* rx = &rx_global;
   rx_solving_options_ind *ind = &(rx->subjects[id]);
   if (ind->isIni == 1) { // only initialize at beginning
     // In this case the par_ptr will be updated with the new values, but they are out of order
