@@ -2,17 +2,16 @@
 //#undef NDEBUG
 #define STRICT_R_HEADERS
 #include "../inst/include/rxode2random.h"
-#include "rxomp.h"
 #define min2( a , b )  ( (a) < (b) ? (a) : (b) )
 #include <RcppArmadillo.h>
 #include <rxode2parse.h>
 #include <threefry.h>
-#include "seed.h"
 #include <R.h>
 #include "checkmate.h"
 #ifdef ENABLE_NLS
 #include <libintl.h>
 #define _(String) dgettext ("rxode2", String)
+#include "rxomp.h"
 /* replace pkg as appropriate */
 #else
 #define _(String) (String)
@@ -21,6 +20,7 @@ using namespace Rcpp;
 using namespace arma;
 #include "../inst/include/rxode2random_as.h"
 #include "threefry.h"
+#include "seed.h"
 
 extern "C" {
   rx_solve rxode2random_rx_global;
@@ -825,7 +825,6 @@ arma::mat rxMvrandn_(NumericMatrix A_,
 
 std::vector<sitmo::threefry> _eng;
 
-void seedEngV(uint32_t seed, int ncores);
 extern "C" void seedEng(int ncores) {
   uint32_t seed = getRxSeed1(ncores);
   _eng.clear();
@@ -837,7 +836,6 @@ extern "C" void seedEng(int ncores) {
   seed = getRxSeed1(ncores);
   seedEngV(seed, ncores);
 }
-extern "C" void setSeedEng1V(uint32_t seed);
 extern "C" void setSeedEng1(uint32_t seed) {
   (_eng[rx_get_thread(op_global.cores)]).seed(seed);
   setSeedEng1V(seed);

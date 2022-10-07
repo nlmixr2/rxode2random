@@ -119,7 +119,18 @@ void R_init_rxode2random(DllInfo *info){
   R_RegisterCCallable("rxode2random", "_rxode2random_qstrictSn", (DL_FUNC) &_rxode2random_qstrictSn);
   R_RegisterCCallable("rxode2random", "_rxode2random_qstrictSdn", (DL_FUNC) &_rxode2random_qstrictSdn);
   R_RegisterCCallable("rxode2random", "_rxode2random_qassertS", (DL_FUNC) &_rxode2random_qassertS);
-  //  R_RegisterCCallable("rxode2random", "_rxode2random_getRxSeed1", (DL_FUNC) &_rxode2random_getRxSeed1);
+  R_RegisterCCallable("rxode2random", "_rxode2random_getRxSeed1", (DL_FUNC) &_rxode2random_getRxSeed1);
+  R_RegisterCCallable("rxode2random", "_rxode2random_setRxSeedFinal", (DL_FUNC) &_rxode2random_setRxSeedFinal);
+  R_RegisterCCallable("rxode2random", "_rxode2random_setSeedEng1V",
+                      (DL_FUNC) &_rxode2random_setSeedEng1V);
+  R_RegisterCCallable("rxode2random", "_rxode2random_setSeedEng1",
+                      (DL_FUNC) &_rxode2random_setSeedEng1);
+
+  R_RegisterCCallable("rxode2random", "_rxode2random_seedEngV",
+                      (DL_FUNC) &_rxode2random_seedEngV);
+  R_RegisterCCallable("rxode2random", "_rxode2random_seedEng",
+                      (DL_FUNC) &_rxode2random_seedEng);
+  
   
   R_RegisterCCallable("rxode2random", "simeps", (DL_FUNC) &simeps);
   R_RegisterCCallable("rxode2random", "simeta", (DL_FUNC) &simeta);

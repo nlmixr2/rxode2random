@@ -7,7 +7,6 @@
 #include <RcppArmadillo.h>
 #include <rxode2parse.h>
 #include <vandercorput.h>
-#include "seed.h"
 #include <R.h>
 #ifdef ENABLE_NLS
 #include <libintl.h>
@@ -16,11 +15,13 @@
 #else
 #define _(String) (String)
 #endif
+#include "seed.h"
+
 using namespace Rcpp;
 using namespace arma;
 
 std::vector<sitmo::vandercorput> _engV;
-void seedEngV(uint32_t seed, int ncores){
+extern "C" void seedEngV(uint32_t seed, int ncores){
   _engV.clear();  
   for (int i= 0; i < ncores; i++) {
     sitmo::vandercorput eng0;

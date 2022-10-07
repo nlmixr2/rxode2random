@@ -49,7 +49,7 @@ extern "C" SEXP _rxode2random_rxSetSeed(SEXP intIn) {
   return R_NilValue;
 }
 
-uint32_t getRxSeed1(int ncores) {
+extern "C" uint32_t getRxSeed1(int ncores) {
   uint32_t seed;
   if (useRxSeed) {
     seed = rxSeed;
