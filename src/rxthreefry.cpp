@@ -21,6 +21,7 @@ using namespace arma;
 #include "../inst/include/rxode2random_as.h"
 #include "threefry.h"
 #include "seed.h"
+#include "../inst/include/rxode2random_fillVec.h"
 
 extern "C" {
   rx_solve rxode2random_rx_global;
@@ -1467,19 +1468,6 @@ bool anyFinite(arma::vec v){
     if (R_FINITE(v[i])) return true;
   }
   return false;
-}
-
-arma::vec fillVec(arma::vec& in, int len){
-  if ((int)in.size() == len){
-    return in;
-  } else if ((int)(in.size()) == 1){
-    arma::vec out(len);
-    std::fill_n(out.begin(), len, in[0]);
-    return out;
-  } else {
-    arma::vec z;
-    return z;
-  }
 }
 
 //[[Rcpp::export]]

@@ -130,6 +130,8 @@ void R_init_rxode2random(DllInfo *info){
                       (DL_FUNC) &_rxode2random_seedEngV);
   R_RegisterCCallable("rxode2random", "_rxode2random_seedEng",
                       (DL_FUNC) &_rxode2random_seedEng);
+  R_RegisterCCallable("rxode2random", "_rxode2random_convertId_",
+                      (DL_FUNC) &_rxode2random_convertId_);
   
   
   R_RegisterCCallable("rxode2random", "simeps", (DL_FUNC) &simeps);
