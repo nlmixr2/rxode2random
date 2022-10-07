@@ -1,8 +1,6 @@
 #ifndef _rxrandom_defines_h__
 #define _rxrandom_defines_h__
-
 #ifdef _isrxode2random_
-
 #define rxbinom rxode2random_rxbinom
 #define rxnbinomMu rxode2random_rxnbinomMu
 #define rxnbinom rxode2random_rxnbinom
@@ -35,12 +33,12 @@
 #define rigamma rxode2random_rigamma
 #define ribeta rxode2random_ribeta
 #define rinormV rxode2random_rinormV
-#define qassertS rxode2random_qassertS
-#define qtest rxode2random_qtest
-#define qstrictS rxode2random_qstrictS
-#define qstrictSn rxode2random_qstrictSn
-#define qstrictSdn rxode2random_qstrictSdn
-#define qstrict rxode2random_qstrict
+#define qassertS _rxode2random_qassertS
+#define qtest _rxode2random_qtest
+#define qstrictS _rxode2random_qstrictS
+#define qstrictSn _rxode2random_qstrictSn
+#define qstrictSdn _rxode2random_qstrictSdn
+#define qstrict _rxode2random_qstrict
 #define rx_global rxode2random_rx_global
 #define op_global rxode2random_op_global
 #define getLowerVec rxode2random_getLowerVec
@@ -52,10 +50,9 @@
 #define setZeroMatrix rxode2random_setZeroMatrix
 #define rxSolveFree rxode2random_rxSolveFree
 #define etTransSexp rxode2random_etTransSexp
-#define _vecDF rxode2random_vecDF
+#define _vecDF _rxode2random_vecDF
 #define rxModelsAssign roxde2random_rxModelsAssign
 #define rxRmvnSEXP rxode2random_rxRmvnSEXP
-#define _cbindOme rxode2random_cbindOme
 #define rxModelVars_ rxode2random_rxModelVars_
 #define chin rxode2random_chin
 #define rxExpandNestingSexp rxode2random_rxExpandNestingSexp
@@ -63,13 +60,8 @@
 #define _rxSetSeed rxode2random_rxSetSeed
 #define rxGetSeed rxode2random_rxGetSeed
 #define _cbindOme _rxode2random_cbindOme
-#define _vecDF _rxode2random_vecDF
 #define convertId_ rxode2random_convertId_
-#define qtest _rxode2random_qtest
-#define qstrictS _rxode2random_qstrictS
-#define qstrictSn _rxode2random_qstrictSn
-#define qstrictSdn _rxode2random_qstrictSdn
-#define qassertS _rxode2random_qassertS
+#define getRxSeed1 _rxode2random_getRxSeed1
 #endif // _isrxode2random_
 
 #endif

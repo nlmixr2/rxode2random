@@ -3,6 +3,7 @@
 #define STRICT_R_HEADER
 #include <Rcpp.h>
 using namespace Rcpp;
+#include "../inst/include/rxode2random.h"
 #include "checkmate.h"
 #include "../inst/include/rxode2random_as.h"
 //

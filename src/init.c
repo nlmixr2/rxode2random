@@ -10,6 +10,7 @@
 #include "../inst/include/rxode2random.h"
 #define __DOINIT__
 #include "rxthreefry.h"
+#include "seed.h"
 
 SEXP _rxode2random_rinvchisq(SEXP nSEXP, SEXP nuSEXP, SEXP scaleSEXP);
 SEXP _rxode2random_rLKJ1(SEXP dSEXP, SEXP etaSEXP, SEXP choleskySEXP);
@@ -118,6 +119,7 @@ void R_init_rxode2random(DllInfo *info){
   R_RegisterCCallable("rxode2random", "_rxode2random_qstrictSn", (DL_FUNC) &_rxode2random_qstrictSn);
   R_RegisterCCallable("rxode2random", "_rxode2random_qstrictSdn", (DL_FUNC) &_rxode2random_qstrictSdn);
   R_RegisterCCallable("rxode2random", "_rxode2random_qassertS", (DL_FUNC) &_rxode2random_qassertS);
+  //  R_RegisterCCallable("rxode2random", "_rxode2random_getRxSeed1", (DL_FUNC) &_rxode2random_getRxSeed1);
   
   R_RegisterCCallable("rxode2random", "simeps", (DL_FUNC) &simeps);
   R_RegisterCCallable("rxode2random", "simeta", (DL_FUNC) &simeta);
@@ -158,7 +160,7 @@ void R_init_rxode2random(DllInfo *info){
   R_RegisterCCallable("rxode2random", "rit_", (DL_FUNC) &rit_);
   R_RegisterCCallable("rxode2random", "riunif", (DL_FUNC) &riunif);
   R_RegisterCCallable("rxode2random", "riweibull", (DL_FUNC) &riweibull);
-  R_RegisterCCallable("rxode2random", "_rxode2random_vecDF", (DL_FUNC) &_rxode2random_vecDF, 2});
+  R_RegisterCCallable("rxode2random", "_rxode2random_vecDF", (DL_FUNC) &_rxode2random_vecDF);
 
   // log likelihoods used in calculations
   static const R_CMethodDef cMethods[] = {
