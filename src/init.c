@@ -65,6 +65,37 @@ SEXP _rxode2random_qstrictSdn(SEXP x_, const char *what);
 
 SEXP _rxode2random_qassertS(SEXP in, const char *test, const char *what);
 
+typedef SEXP (*lotriMat_type) (SEXP, SEXP, SEXP);
+typedef SEXP (*asLotriMat_type) (SEXP, SEXP, SEXP);
+typedef SEXP (*lotriSep_type) (SEXP, SEXP, SEXP, SEXP, SEXP);
+typedef SEXP (*lotriAllNames_type) (SEXP);
+typedef SEXP (*lotriGetBounds_type) (SEXP, SEXP, SEXP);
+typedef SEXP (*isLotri_type) (SEXP);
+typedef SEXP (*lotriMaxNu_type) (SEXP);
+typedef SEXP (*rxSolveFreeSexp_t)(void);
+typedef void (*setZeroMatrix_t)(int which);
+typedef SEXP (*etTrans_t)(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+typedef void (*rxModelsAssignC_t)(const char* str, SEXP assign);
+typedef SEXP (*rxModelVars_SEXP_t)(SEXP);
+typedef SEXP (*rxExpandNestingSexp_t)(SEXP, SEXP, SEXP);
+typedef SEXP (*chin_t)(SEXP x, SEXP table);
+typedef SEXP (*getLowerVec_t)(int type, rx_solve* rx);
+typedef SEXP (*getUpperVec_t)(int type, rx_solve* rx);
+typedef SEXP (*getArmaMat_t)(int type, int csim, rx_solve* rx);
+
+void _rxode2random_assignPtrsInRxode2(rx_solve rx,
+                                      rx_solving_options op,
+                                      rxSolveFreeSexp_t rSF,
+                                      setZeroMatrix_t sZM,
+                                      etTrans_t et,
+                                      rxModelsAssignC_t rmac,
+                                      rxModelVars_SEXP_t mv,
+                                      rxExpandNestingSexp_t rens,
+                                      chin_t cin,
+                                      getLowerVec_t glv,
+                                      getUpperVec_t guv,
+                                      getArmaMat_t gams);
+
 void R_init_rxode2random(DllInfo *info){
   R_CallMethodDef callMethods[]  = {
     {"_rxode2random_convertId_", (DL_FUNC) &_rxode2random_convertId_, 1},
@@ -114,6 +145,8 @@ void R_init_rxode2random(DllInfo *info){
     {NULL, NULL, 0} 
   };
   // C callable to assign environments.
+  R_RegisterCCallable("rxode2random", "_rxode2random_assignPtrsInRxode2",
+                      (DL_FUNC) &_rxode2random_assignPtrsInRxode2);
   R_RegisterCCallable("rxode2random", "_rxode2random_qtest", (DL_FUNC) &_rxode2random_qtest);
   R_RegisterCCallable("rxode2random", "_rxode2random_qstrictS", (DL_FUNC) &_rxode2random_qstrictS);
   R_RegisterCCallable("rxode2random", "_rxode2random_qstrictSn", (DL_FUNC) &_rxode2random_qstrictSn);
@@ -186,3 +219,4 @@ void R_init_rxode2random(DllInfo *info){
 
 void R_unload_rxode2random(DllInfo *info){
 }
+ 

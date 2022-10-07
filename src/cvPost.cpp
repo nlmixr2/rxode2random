@@ -39,6 +39,41 @@ extern "C"{
   rxExpandNestingSexp_t rxExpandNestingSexp;
   typedef SEXP (*chin_t)(SEXP x, SEXP table);
   chin_t chin;
+  typedef SEXP (*getLowerVec_t)(int type, rx_solve* rx);
+  typedef SEXP (*getUpperVec_t)(int type, rx_solve* rx);
+  typedef SEXP (*getArmaMat_t)(int type, int csim, rx_solve* rx);
+  extern getLowerVec_t getLowerVecSexp;
+  extern getUpperVec_t getUpperVecSexp;
+  extern getArmaMat_t getArmaMatSexp;
+  extern rx_solve rxode2random_rx_global;
+  extern rx_solving_options rxode2random_op_global;
+
+  void _rxode2random_assignPtrsInRxode2(rx_solve rx,
+                                        rx_solving_options op,
+                                        rxSolveFreeSexp_t rSF,
+                                        setZeroMatrix_t sZM,
+                                        etTrans_t et,
+                                        rxModelsAssignC_t rmac,
+                                        rxModelVars_SEXP_t mv,
+                                        rxExpandNestingSexp_t rens,
+                                        chin_t cin,
+                                        getLowerVec_t glv,
+                                        getUpperVec_t guv,
+                                        getArmaMat_t gams) {
+    getUpperVecSexp        = guv;
+    getLowerVecSexp        = glv;
+    getArmaMatSexp         = gams;
+    chin                   = cin;
+    rxExpandNestingSexp    = rens;
+    etTransSexp            = et;
+    setZeroMatrix          = sZM;
+    rxSolveFree            = rSF;
+    rxode2random_op_global = op;
+    rxode2random_rx_global = rx;
+    rxModelsAssign         = rmac;
+    rxModelVars_           = mv;
+  }
+
 }
 
 List etTrans(List inData, const RObject &obj, bool addCmt=false,
