@@ -1075,3 +1075,14 @@ rxWithPreserveSeed <- function(code) {
   on.exit(.rxSetSeed(.origSeed), add = TRUE)
   force(code)
 }
+
+#' Get the MD5 hash of the current rxode2random revision
+#'
+#' @return md5 hash of rxode2random revision
+#' @author Matthew L. Fidler
+#' @export 
+#' @examples
+#' rxode2randomMd5()
+rxode2randomMd5 <- function() {
+  rxode2random.md5  
+}
