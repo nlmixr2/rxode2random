@@ -116,6 +116,13 @@ rxMvrandn_ <- function(A_, mu, sigma, lower, upper, ncores = 1L, a = 0.4, tol = 
     .Call(`_rxode2random_rxMvrandn_`, A_, mu, sigma, lower, upper, ncores, a, tol, nlTol, nlMaxiter)
 }
 
+#' This seeds the engine based on the number of cores used in random number generation
+#'
+#' @param ncores is the number of cores to use.
+#' @keywords internal
+#' @export
+#' @examples
+#' rxSeedEng()
 rxSeedEng <- function(ncores = 1L) {
     .Call(`_rxode2random_rxSeedEng`, ncores)
 }

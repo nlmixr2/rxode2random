@@ -842,6 +842,13 @@ extern "C" void setSeedEng1(uint32_t seed) {
   setSeedEng1V(seed);
 }
 
+//' This seeds the engine based on the number of cores used in random number generation
+//'
+//' @param ncores is the number of cores to use.
+//' @keywords internal
+//' @export
+//' @examples
+//' rxSeedEng()
 //[[Rcpp::export]]
 RObject rxSeedEng(int ncores = 1){
   seedEng(ncores);
