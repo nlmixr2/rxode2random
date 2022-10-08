@@ -40,9 +40,6 @@
     <loc>https://nlmixr2.github.io/rxode2random/reference/rxPp.html</loc>
   </url>
   <url>
-    <loc>https://nlmixr2.github.io/rxode2random/reference/rxRandNV.html</loc>
-  </url>
-  <url>
     <loc>https://nlmixr2.github.io/rxode2random/reference/rxRmvn.html</loc>
   </url>
   <url>
@@ -82,7 +79,7 @@
     <loc>https://nlmixr2.github.io/rxode2random/reference/rxnbinom.html</loc>
   </url>
   <url>
-    <loc>https://nlmixr2.github.io/rxode2random/reference/rxnormV.html</loc>
+    <loc>https://nlmixr2.github.io/rxode2random/reference/rxnorm.html</loc>
   </url>
   <url>
     <loc>https://nlmixr2.github.io/rxode2random/reference/rxode2randomMd5.html</loc>

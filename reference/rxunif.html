@@ -79,8 +79,7 @@ engine <code>threefry</code> and then run the code.</p>
 
 <dt>ncores</dt>
 <dd><p>Number of cores for the simulation</p>
-<p><code>rxnorm</code> simulates using the threefry sitmo generator; <code>rxnormV</code>
-uses the vandercorput generator</p></dd>
+<p><code>rxnorm</code> simulates using the threefry sitmo generator;</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -108,14 +107,14 @@ results do not depend on the number of cores used.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Use threefry engine</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">rxunif</span><span class="op">(</span>min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="co"># with rxunif you have to explicitly state n</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1.7156191 0.4691899 3.1777512 3.8215025 3.0951524 1.3938731 1.2329232</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8] 0.2352482 3.9272132 0.9692294</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 3.84975015 0.04180323 3.79552461 0.03247190 3.33397455 2.07096545</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] 1.36305908 0.79465123 0.37261857 3.37173599</span>
 <span class="r-in"><span><span class="fu">rxunif</span><span class="op">(</span>min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">4</span>, n <span class="op">=</span> <span class="fl">10</span>, ncores <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="co"># You can parallelize the simulation using openMP</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 2.9346356 0.9494718 1.5736514 0.3253398 0.4984635 0.3246509 2.7563656</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8] 1.7133166 2.7014728 2.1199054</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0.329659617 0.435003406 1.040313883 0.039681940 3.401238863 3.403635250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] 1.622730298 0.266147923 0.009111452 1.222125224</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">rxunif</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5167785</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.468003</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
