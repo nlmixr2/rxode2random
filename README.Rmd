@@ -27,6 +27,7 @@ knitr::opts_chunk$set(
 
 The goal of rxode2random is to split off the 'rxode2' random number generation from the
 ode solving and C compilation of models. 
+
 ## Installation
 
 You can install the development version of rxode2random from [GitHub](https://github.com/) with:

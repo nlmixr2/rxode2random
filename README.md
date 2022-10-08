@@ -19,8 +19,9 @@ downloads](https://cranlogs.r-pkg.org/badges/rxode2random)](https://cran.r-proje
 <!-- badges: end -->
 
 The goal of rxode2random is to split off the ‘rxode2’ random number
-generation from the ode solving and C compilation of models. \#\#
-Installation
+generation from the ode solving and C compilation of models.
+
+## Installation
 
 You can install the development version of rxode2random from
 [GitHub](https://github.com/) with:
@@ -40,16 +41,16 @@ library(rxode2random)
 cvPost(10, lotri::lotri(a+b~c(1,0.5,1)), n=3)
 #> [[1]]
 #>          a        b
-#> a 1.961675 1.594139
-#> b 1.594139 2.124261
+#> a 1.536429 1.287631
+#> b 1.287631 1.517315
 #> 
 #> [[2]]
-#>          a        b
-#> a 4.742619 2.888424
-#> b 2.888424 2.342835
+#>           a         b
+#> a 0.9435289 0.7727091
+#> b 0.7727091 1.3627964
 #> 
 #> [[3]]
-#>           a         b
-#> a 0.9629715 0.3815303
-#> b 0.3815303 0.5152573
+#>          a        b
+#> a 2.774098 2.611791
+#> b 2.611791 3.115227
 ```
