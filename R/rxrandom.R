@@ -33,7 +33,7 @@ rxnorm <- function(mean = 0, sd = 1, n = 1L, ncores = 1L) {
 #' Simulate random Poisson variable from threefry generator
 #'
 #' @inheritParams stats::rpois
-#' @inheritParams rxnormV
+#' @inheritParams rxnorm
 #'
 #' @template birthdayProblem
 #' @return poission random number deviates
@@ -58,7 +58,7 @@ rxpois <- function(lambda, n = 1L, ncores = 1L) {
 #' Simulate student t variable from threefry generator
 #'
 #' @inheritParams stats::rt
-#' @inheritParams rxnormV
+#' @inheritParams rxnorm
 #'
 #' @template birthdayProblem
 #' @return t-distribution random numbers
@@ -83,7 +83,7 @@ rxt <- function(df, n = 1L, ncores = 1L) {
 #' Simulate uniform variable from threefry generator
 #'
 #' @inheritParams stats::runif
-#' @inheritParams rxnormV
+#' @inheritParams rxnorm
 #'
 #' @template birthdayProblem
 #' @return uniform random numbers
@@ -109,7 +109,7 @@ rxunif <- function(min = 0, max = 1, n = 1L, ncores = 1L) {
 #' Simulate Weibull variable from threefry generator
 #'
 #' @inheritParams stats::rweibull
-#' @inheritParams rxnormV
+#' @inheritParams rxnorm
 #'
 #' @template birthdayProblem
 #' @return Weibull random deviates

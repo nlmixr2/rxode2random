@@ -8,8 +8,6 @@ test_that("rnorm", {
 
 test_that("random variables work in R alone", {
   rxWithSeed(1024, {
-    expect_true(is.numeric(rxnormV()))
-
     expect_true(is.numeric(rxcauchy()))
 
     p <- rxpois(2, n = 30000)
