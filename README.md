@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# rxode2parse
+# rxode2random
 
 <!-- badges: start -->
 
@@ -36,5 +36,20 @@ This is mostly about random number generation so you can select a matrix
 from `cvPost()`
 
 ``` r
-cvPost()
+library(rxode2random)
+cvPost(10, lotri::lotri(a+b~c(1,0.5,1)), n=3)
+#> [[1]]
+#>          a        b
+#> a 1.961675 1.594139
+#> b 1.594139 2.124261
+#> 
+#> [[2]]
+#>          a        b
+#> a 4.742619 2.888424
+#> b 2.888424 2.342835
+#> 
+#> [[3]]
+#>           a         b
+#> a 0.9629715 0.3815303
+#> b 0.3815303 0.5152573
 ```
