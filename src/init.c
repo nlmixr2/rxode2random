@@ -145,6 +145,8 @@ void R_init_rxode2random(DllInfo *info){
     {NULL, NULL, 0} 
   };
   // C callable to assign environments.
+  R_RegisterCCallable("rxode2random", "_rxode2random_expandPars_",
+                      (DL_FUNC) &_rxode2random_expandPars_);
   R_RegisterCCallable("rxode2random", "_rxode2random_assignPtrsInRxode2",
                       (DL_FUNC) &_rxode2random_assignPtrsInRxode2);
   R_RegisterCCallable("rxode2random", "_rxode2random_qtest", (DL_FUNC) &_rxode2random_qtest);
