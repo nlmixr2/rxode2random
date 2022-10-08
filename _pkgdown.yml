@@ -1,0 +1,5 @@
+url: https://nlmixr2.github.io/rxode2random
+template:
+  bootstrap: 5
+  params:
+    bootswatch: flatly
