@@ -72,7 +72,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header">
-<img src="logo.png" class="logo" alt=""><h1 id="rxode2parse">rxode2parse<a class="anchor" aria-label="anchor" href="#rxode2parse"></a>
+<img src="logo.png" class="logo" alt=""><h1 id="rxode2random">rxode2random<a class="anchor" aria-label="anchor" href="#rxode2random"></a>
 </h1>
 </div>
 <!-- badges: start -->
@@ -87,7 +87,22 @@
 </h2>
 <p>This is mostly about random number generation so you can select a matrix from <code><a href="reference/cvPost.html">cvPost()</a></code></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/cvPost.html">cvPost</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://nlmixr2.github.io/rxode2random/">rxode2random</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/cvPost.html">cvPost</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fu">lotri</span><span class="fu">::</span><span class="fu">lotri</span><span class="op">(</span><span class="va">a</span><span class="op">+</span><span class="va">b</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0.5</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span>, n<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [[1]]</span></span>
+<span><span class="co">#&gt;          a        b</span></span>
+<span><span class="co">#&gt; a 1.961675 1.594139</span></span>
+<span><span class="co">#&gt; b 1.594139 2.124261</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]</span></span>
+<span><span class="co">#&gt;          a        b</span></span>
+<span><span class="co">#&gt; a 4.742619 2.888424</span></span>
+<span><span class="co">#&gt; b 2.888424 2.342835</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]</span></span>
+<span><span class="co">#&gt;           a         b</span></span>
+<span><span class="co">#&gt; a 0.9629715 0.3815303</span></span>
+<span><span class="co">#&gt; b 0.3815303 0.5152573</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
