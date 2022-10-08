@@ -4,5 +4,9 @@
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
 ^inst/tools/workaround.Rout$
+^_pkgdown.yml$
+^logo.png$
+^man-roxygen
+^pkgdown
 ^workaround.Rout$
 

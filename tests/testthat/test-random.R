@@ -8,7 +8,7 @@ test_that("rnorm", {
 
 test_that("rnormV", {
   rxWithSeed(1024, {
-    x <- rxnormV(n = 1e4)
+    x <- rxnormV(n = 1e7)
     expect_equal(mean(x), 0, tolerance = 0.1)
   })
 })
