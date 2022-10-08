@@ -95,6 +95,8 @@ void _rxode2random_assignPtrsInRxode2(rx_solve rx,
                                       getLowerVec_t glv,
                                       getUpperVec_t guv,
                                       getArmaMat_t gams);
+  void _rxode2random_assignSolveOnly(rx_solve rx,
+                                     rx_solving_options op);
 
 void R_init_rxode2random(DllInfo *info){
   R_CallMethodDef callMethods[]  = {
@@ -236,6 +238,8 @@ void R_init_rxode2random(DllInfo *info){
   R_RegisterCCallable("rxode2random", "rxweibull", (DL_FUNC) &rxweibull);
   R_RegisterCCallable("rxode2random", "simeps", (DL_FUNC) &simeps);
   R_RegisterCCallable("rxode2random", "simeta", (DL_FUNC) &simeta);
+  R_RegisterCCallable("rxode2random", "_rxode2random_assignSolveOnly", (DL_FUNC) &_rxode2random_assignSolveOnly);
+
 
   // log likelihoods used in calculations
   static const R_CMethodDef cMethods[] = {

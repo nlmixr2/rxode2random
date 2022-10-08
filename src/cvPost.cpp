@@ -48,6 +48,12 @@ extern "C"{
   extern rx_solve rxode2random_rx_global;
   extern rx_solving_options rxode2random_op_global;
 
+  void _rxode2random_assignSolveOnly(rx_solve rx,
+                                     rx_solving_options op) {
+    rxode2random_op_global = op;
+    rxode2random_rx_global = rx;
+  }
+
   void _rxode2random_assignPtrsInRxode2(rx_solve rx,
                                         rx_solving_options op,
                                         rxSolveFreeSexp_t rSF,
