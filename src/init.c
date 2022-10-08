@@ -49,7 +49,6 @@ SEXP _rxode2random_rxRmvnSEXP(SEXP nSSEXP, SEXP muSSEXP, SEXP sigmaSSEXP, SEXP l
 SEXP _rxode2random_rpp_(SEXP nSSEXP, SEXP lambdaSSEXP, SEXP gammaSSEXP, SEXP probSSEXP, SEXP t0SSEXP, SEXP tmaxSSEXP, SEXP randomOrderSSEXP);
 SEXP _rxode2random_rxordSelect(SEXP uSEXP, SEXP csSEXP);
 SEXP _rxode2random_rxrandnV(SEXP nrowSEXP, SEXP ncolSEXP);
-SEXP _rxode2random_rxnormV_(SEXP meanSEXP, SEXP sdSEXP, SEXP nSEXP, SEXP ncoresSEXP);
 SEXP _rxode2random_rxGetSeed(void);
 SEXP _rxode2random_phi(SEXP q);
 
@@ -141,7 +140,6 @@ void R_init_rxode2random(DllInfo *info){
     {"_rxode2random_rpp_", (DL_FUNC) &_rxode2random_rpp_, 7},
     {"_rxode2random_rxordSelect", (DL_FUNC) &_rxode2random_rxordSelect, 2},
     {"_rxode2random_rxrandnV", (DL_FUNC) &_rxode2random_rxrandnV, 2},
-    {"_rxode2random_rxnormV_", (DL_FUNC) &_rxode2random_rxnormV_, 4},
     {"_rxode2random_rxGetSeed", (DL_FUNC) &_rxode2random_rxGetSeed, 0},
     {"_rxode2random_phi", (DL_FUNC) &_rxode2random_phi, 1},
     {NULL, NULL, 0} 
@@ -189,7 +187,6 @@ void R_init_rxode2random(DllInfo *info){
   R_RegisterCCallable("rxode2random", "_rxode2random_rxgeom_", (DL_FUNC) &_rxode2random_rxgeom_);
   R_RegisterCCallable("rxode2random", "_rxode2random_rxnbinomMu_",(DL_FUNC) &_rxode2random_rxnbinomMu_);
   R_RegisterCCallable("rxode2random", "_rxode2random_rxnbinom_",(DL_FUNC) &_rxode2random_rxnbinom_);
-  R_RegisterCCallable("rxode2random", "_rxode2random_rxnormV_", (DL_FUNC) &_rxode2random_rxnormV_);
   R_RegisterCCallable("rxode2random", "_rxode2random_rxnorm_", (DL_FUNC) &_rxode2random_rxnorm_);
   R_RegisterCCallable("rxode2random", "_rxode2random_rxordSelect", (DL_FUNC) &_rxode2random_rxordSelect);
   R_RegisterCCallable("rxode2random", "_rxode2random_rxpois_",(DL_FUNC) &_rxode2random_rxpois_);
@@ -198,10 +195,8 @@ void R_init_rxode2random(DllInfo *info){
   R_RegisterCCallable("rxode2random", "_rxode2random_rxunif_", (DL_FUNC) &_rxode2random_rxunif_);
   R_RegisterCCallable("rxode2random", "_rxode2random_rxweibull_", (DL_FUNC) &_rxode2random_rxweibull_);
   R_RegisterCCallable("rxode2random", "_rxode2random_seedEng", (DL_FUNC) &_rxode2random_seedEng);
-  R_RegisterCCallable("rxode2random", "_rxode2random_seedEngV", (DL_FUNC) &_rxode2random_seedEngV);
   R_RegisterCCallable("rxode2random", "_rxode2random_setRxSeedFinal", (DL_FUNC) &_rxode2random_setRxSeedFinal);
   R_RegisterCCallable("rxode2random", "_rxode2random_setSeedEng1", (DL_FUNC) &_rxode2random_setSeedEng1);
-  R_RegisterCCallable("rxode2random", "_rxode2random_setSeedEng1V", (DL_FUNC) &_rxode2random_setSeedEng1V);
   R_RegisterCCallable("rxode2random", "_rxode2random_vecDF", (DL_FUNC) &_rxode2random_vecDF);
   R_RegisterCCallable("rxode2random", "phi", (DL_FUNC) &phi);
   R_RegisterCCallable("rxode2random", "ribeta", (DL_FUNC) &ribeta);
@@ -215,7 +210,6 @@ void R_init_rxode2random(DllInfo *info){
   R_RegisterCCallable("rxode2random", "rinbinom", (DL_FUNC) &rinbinom);
   R_RegisterCCallable("rxode2random", "rinbinomMu", (DL_FUNC) &rinbinomMu);
   R_RegisterCCallable("rxode2random", "rinorm", (DL_FUNC) &rinorm);
-  R_RegisterCCallable("rxode2random", "rinormV", (DL_FUNC) &rinormV);
   R_RegisterCCallable("rxode2random", "ripois", (DL_FUNC) &ripois);
   R_RegisterCCallable("rxode2random", "rit_", (DL_FUNC) &rit_);
   R_RegisterCCallable("rxode2random", "riunif", (DL_FUNC) &riunif);
@@ -231,7 +225,6 @@ void R_init_rxode2random(DllInfo *info){
   R_RegisterCCallable("rxode2random", "rxnbinom", (DL_FUNC) &rxnbinom);
   R_RegisterCCallable("rxode2random", "rxnbinomMu", (DL_FUNC) &rxnbinomMu);
   R_RegisterCCallable("rxode2random", "rxnorm", (DL_FUNC) &rxnorm);
-  R_RegisterCCallable("rxode2random", "rxnormV", (DL_FUNC) &rxnormV);
   R_RegisterCCallable("rxode2random", "rxpois", (DL_FUNC) &rxpois);
   R_RegisterCCallable("rxode2random", "rxt_", (DL_FUNC) &rxt_);
   R_RegisterCCallable("rxode2random", "rxunif", (DL_FUNC) &rxunif);

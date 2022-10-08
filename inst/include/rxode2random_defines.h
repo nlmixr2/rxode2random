@@ -63,9 +63,7 @@
 #define convertId_ rxode2random_convertId_
 #define getRxSeed1 _rxode2random_getRxSeed1
 #define setRxSeedFinal _rxode2random_setRxSeedFinal
-#define setSeedEng1V _rxode2random_setSeedEng1V
 #define setSeedEng1 _rxode2random_setSeedEng1
-#define seedEngV _rxode2random_seedEngV
 #define seedEng _rxode2random_seedEng
 #endif // _isrxode2random_
 

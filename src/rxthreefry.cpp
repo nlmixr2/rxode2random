@@ -835,11 +835,9 @@ extern "C" void seedEng(int ncores) {
     _eng.push_back(eng0);
   }
   seed = getRxSeed1(ncores);
-  seedEngV(seed, ncores);
 }
 extern "C" void setSeedEng1(uint32_t seed) {
   (_eng[rx_get_thread(op_global.cores)]).seed(seed);
-  setSeedEng1V(seed);
 }
 
 //' This seeds the engine based on the number of cores used in random number generation

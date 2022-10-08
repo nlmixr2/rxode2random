@@ -203,14 +203,6 @@ rxordSelect <- function(u, cs) {
     .Call(`_rxode2random_rxordSelect`, u, cs)
 }
 
-rxrandnV <- function(nrow, ncol) {
-    .Call(`_rxode2random_rxrandnV`, nrow, ncol)
-}
-
-rxnormV_ <- function(mean, sd, n, ncores) {
-    .Call(`_rxode2random_rxnormV_`, mean, sd, n, ncores)
-}
-
 #' Get the rxode2 seed
 #'
 #' @return rxode2 seed state or -1 when the seed isn't set

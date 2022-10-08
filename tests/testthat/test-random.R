@@ -6,13 +6,6 @@ test_that("rnorm", {
   })
 })
 
-test_that("rnormV", {
-  rxWithSeed(1024, {
-    x <- rxnormV(n = 1e5)
-    expect_equal(mean(x), 0, tolerance = 0.1)
-  })
-})
-
 test_that("random variables work in R alone", {
   rxWithSeed(1024, {
     expect_true(is.numeric(rxnormV()))

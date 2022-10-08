@@ -1,14 +1,3 @@
-#' @export
-#' @rdname rxnormV
-rxnorm <- function(mean = 0, sd = 1, n = 1L, ncores = 1L) {
-  checkmate::assertNumeric(mean, len = 1)
-  checkmate::assertNumeric(sd, lower = 0, len = 1)
-  checkmate::assertCount(n)
-  checkmate::assertCount(ncores)
-  rxSeedEng(ncores)
-  .Call(`_rxode2random_rxnorm_`, mean, sd, n, ncores)
-}
-
 #' Simulate random normal variable from threefry/vandercorput generator
 #'
 #' @inheritParams stats::rnorm
@@ -17,8 +6,7 @@ rxnorm <- function(mean = 0, sd = 1, n = 1L, ncores = 1L) {
 #'
 #' @param ncores Number of cores for the simulation
 #'
-#' `rxnorm` simulates using the threefry sitmo generator; `rxnormV`
-#' uses the vandercorput generator
+#' `rxnorm` simulates using the threefry sitmo generator;
 #'
 #' @return normal random number deviates
 #' 
@@ -33,23 +21,15 @@ rxnorm <- function(mean = 0, sd = 1, n = 1L, ncores = 1L) {
 #'
 #' rxnorm(2, 3) ## The first 2 arguments are the mean and standard deviation
 #'
-#' ## Use vandercorput generator
-#'
-#' rxnormV(n = 10) # with rxnorm you have to explicitly state n
-#' rxnormV(n = 10, ncores = 2) # You can parallelize the simulation using openMP
-#'
-#' rxnormV(2, 3) ## The first 2 arguments are the mean and standard deviation
-#'
 #' @export
-rxnormV <- function(mean = 0, sd = 1, n = 1L, ncores = 1L) {
+rxnorm <- function(mean = 0, sd = 1, n = 1L, ncores = 1L) {
   checkmate::assertNumeric(mean, len = 1)
   checkmate::assertNumeric(sd, lower = 0, len = 1)
   checkmate::assertCount(n)
   checkmate::assertCount(ncores)
   rxSeedEng(ncores)
-  .Call(`_rxode2random_rxnormV_`, mean, sd, n, ncores)
+  .Call(`_rxode2random_rxnorm_`, mean, sd, n, ncores)
 }
-
 #' Simulate random Poisson variable from threefry generator
 #'
 #' @inheritParams stats::rpois
@@ -157,7 +137,7 @@ rxweibull <- function(shape, scale = 1, n = 1L, ncores = 1L) {
 #' Simulate geometric variable from threefry generator
 #'
 #' @inheritParams stats::rgeom
-#' @inheritParams rxnormV
+#' @inheritParams rxnorm
 #'
 #' @template birthdayProblem
 #' @return geometric random deviates
@@ -181,7 +161,7 @@ rxgeom <- function(prob, n = 1L, ncores = 1L) {
 #' Simulate beta variable from threefry generator
 #'
 #' @inheritParams stats::rbeta
-#' @inheritParams rxnormV
+#' @inheritParams rxnorm
 #'
 #' @template birthdayProblem
 #'
@@ -210,7 +190,7 @@ rxbeta <- function(shape1, shape2, n = 1L, ncores = 1L) {
 #'
 #' @param shape The shape of the gamma random variable
 #' @inheritParams stats::rgamma
-#' @inheritParams rxnormV
+#' @inheritParams rxnorm
 #'
 #' @template birthdayProblem
 #'
@@ -239,7 +219,7 @@ rxgamma <- function(shape, rate = 1, n = 1L, ncores = 1L) {
 #' Simulate F variable from threefry generator
 #'
 #' @inheritParams stats::rf
-#' @inheritParams rxnormV
+#' @inheritParams rxnorm
 #'
 #' @template birthdayProblem
 #'
@@ -268,7 +248,7 @@ rxf <- function(df1, df2, n = 1L, ncores = 1L) {
 #' Simulate exponential variable from threefry generator
 #'
 #' @inheritParams stats::rexp
-#' @inheritParams rxnormV
+#' @inheritParams rxnorm
 #'
 #' @template birthdayProblem
 #'
@@ -300,7 +280,7 @@ rxexp <- function(rate, n = 1L, ncores = 1L) {
 #' Simulate chi-squared variable from threefry generator
 #'
 #' @inheritParams stats::rchisq
-#' @inheritParams rxnormV
+#' @inheritParams rxnorm
 #'
 #' @template birthdayProblem
 #'
@@ -326,7 +306,7 @@ rxchisq <- function(df, n = 1L, ncores = 1L) {
 #' Simulate Cauchy variable from threefry generator
 #'
 #' @inheritParams stats::rcauchy
-#' @inheritParams rxnormV
+#' @inheritParams rxnorm
 #'
 #' @template birthdayProblem
 #'
@@ -392,7 +372,7 @@ rxord <- function(...) {
 #' Simulate Binomial variable from threefry generator
 #'
 #' @inheritParams stats::rbinom
-#' @inheritParams rxnormV
+#' @inheritParams rxnorm
 #'
 #' @template birthdayProblem
 #'
@@ -527,27 +507,6 @@ rxPp <- function(n, lambda, gamma = 1.0, prob = NULL, t0 = 0.0, tmax = Inf, rand
   }
   .Call(`_rxode2random_rpp_`, n, lambda, gamma, prob, t0, tmax, randomOrder, PACKAGE = "rxode2random")
 }
-
-#' Create a random "normal" matrix using vandercorput generator
-#'
-#' @param nrow Number of rows
-#'
-#' @param ncol Number of Columns
-#'
-#' @return Matrix of random numbers
-#'
-#' @author Matthew Fidler
-#' @export
-#' @examples
-#'
-#' rxRandNV(1, 1)
-#' rxRandNV(3, 2)
-rxRandNV <- function(nrow = 1, ncol = 1) {
-  checkmate::assertIntegerish(nrow, len = 1, any.missing = FALSE, lower = 1L)
-  checkmate::assertIntegerish(ncol, len = 1, any.missing = FALSE, lower = 1L)
-  .Call(`_rxode2random_rxrandnV`, as.integer(nrow), as.integer(ncol))
-}
-
 
 #' Cumulative distribution of standard normal
 #'
