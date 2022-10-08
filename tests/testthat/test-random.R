@@ -43,7 +43,7 @@ test_that("random variables work in R alone", {
     }
 
     expect_equal(mean(f), mf(40), tolerance = 0.01)
-    expect_equal(sd(f), sf(30, 40), tolerance = 0.01)
+    expect_equal(sd(f), sf(30, 40), tolerance = 0.1)
 
     x2 <- rxgamma(7.5, n = 30000)
 
