@@ -120,6 +120,7 @@ rxMvrandn_ <- function(A_, mu, sigma, lower, upper, ncores = 1L, a = 0.4, tol = 
 #'
 #' @param ncores is the number of cores to use.
 #' @keywords internal
+#' @return Nothing, called for side effects
 #' @export
 #' @examples
 #' rxSeedEng()

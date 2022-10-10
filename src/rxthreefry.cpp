@@ -844,6 +844,7 @@ extern "C" void setSeedEng1(uint32_t seed) {
 //'
 //' @param ncores is the number of cores to use.
 //' @keywords internal
+//' @return Nothing, called for side effects
 //' @export
 //' @examples
 //' rxSeedEng()

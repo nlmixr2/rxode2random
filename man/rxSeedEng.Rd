@@ -9,6 +9,9 @@ rxSeedEng(ncores = 1L)
 \arguments{
 \item{ncores}{is the number of cores to use.}
 }
+\value{
+Nothing, called for side effects
+}
 \description{
 This seeds the engine based on the number of cores used in random number generation
 }
