@@ -456,6 +456,7 @@ SEXP cvPost_(SEXP nuS, SEXP omegaS, SEXP nS, SEXP omegaIsCholS,
   } else {
     stop(_("variable 'type': Can only use type string or integer[1,3]"));
   }
+  setupLotri();
   if (n == 1 && type == 1){
     if (qtest(omegaS, "M")) {
       double nu = getDbl(nuS, "nu");
@@ -474,10 +475,15 @@ SEXP cvPost_(SEXP nuS, SEXP omegaS, SEXP nS, SEXP omegaIsCholS,
         }
         return as<SEXP>(cvPost0(nu, om2, omegaIsChol, returnChol));
       }
-    } else if (isLotri(omegaS)) {
-      RObject omega = omegaS;
+    } else if (!Rf_isNull(omegaS) && isLotri(omegaS)) {
+      RObject omega = as<RObject>(omegaS);
       List omegaIn = as<List>(omega);
-      CharacterVector omegaInNames = Rf_getAttrib(omega, R_NamesSymbol);
+      RObject omegaInNamesRO = Rf_getAttrib(omega, R_NamesSymbol);
+      if (Rf_isNull(omegaInNamesRO)) {
+        print(omega);
+        stop(_("the 'lotri' omega matrix needs to be named (printed above)"));
+      }
+      CharacterVector omegaInNames = as<CharacterVector>(omegaInNamesRO);
       int nOmega = omegaIn.size();
       List omegaLst(nOmega);
       List lotriLst = as<List>(omega.attr("lotri"));
