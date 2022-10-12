@@ -1205,11 +1205,12 @@ SEXP nestingInfo_(SEXP omega, List data) {
     if (lvl != idChar) {
       int found=-1;
       for (int j = lName.size(); j--;){
-	if (STRING_ELT(lNameSEXP,j) == lvl){
-	  found = j;
-	  break;
-	}
+        if (STRING_ELT(lNameSEXP,j) == lvl){
+          found = j;
+          break;
+        }
       }
+      if (found == -1) stop("could not find '%s' in data", CHAR(lvl));
       s = nestingInfoSingle_(data[found], id);
       l1 = Rf_length(Rf_getAttrib(s, R_LevelsSymbol));
       dn = VECTOR_ELT(Rf_getAttrib(VECTOR_ELT(lotriOmega, i),
