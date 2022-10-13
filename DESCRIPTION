@@ -24,7 +24,8 @@ Depends:
 Imports:
     stats,
     Rcpp,
-    checkmate
+    checkmate,
+    lotri
 Suggests:
     testthat (>= 3.0.0)
 LinkingTo:
