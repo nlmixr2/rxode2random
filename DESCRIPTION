@@ -30,7 +30,7 @@ Suggests:
     testthat (>= 3.0.0)
 LinkingTo:
     sitmo,
-    rxode2parse,
+    rxode2parse (>= 2.0.12),
     Rcpp,
     RcppArmadillo,
     BH
