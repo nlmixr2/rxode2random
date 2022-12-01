@@ -56,6 +56,7 @@ SEXP _rxode2random_cbindOme(SEXP, SEXP, SEXP);
 SEXP _rxode2random_vecDF(SEXP, SEXP);
 SEXP _rxode2random_convertId_(SEXP);
 
+SEXP _rxode2random_qtest_sexp(SEXP in, const char *test);
 bool _rxode2random_qtest(SEXP in, const char *test);
 SEXP _rxode2random_qstrictS(SEXP nn, const char *what);
 SEXP _rxode2random_qstrictSn(SEXP x_, const char *what);
