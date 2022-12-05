@@ -171,7 +171,7 @@ NumericMatrix cvPost0(double nu, NumericMatrix omega, bool omegaIsChol = false,
           ret[0] = nu*omega[0]/(Rf_rgamma(nu/2.0,2.0));
         }
         if (R_FINITE(ret[0])) {
-          retIsGood = true
+          retIsGood = true;
         }
       }
       if (returnChol) ret[0] = sqrt(ret[0]);
