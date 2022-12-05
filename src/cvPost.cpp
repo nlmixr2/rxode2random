@@ -588,7 +588,7 @@ SEXP cvPost_(SEXP nuS, SEXP omegaS, SEXP nS, SEXP omegaIsCholS,
           arma::mat reti;
           while (!goodSolve) {
             reti = rcvC1(sd, nu, diagXformType, type-1, returnChol);
-            if (all(arma::is_finite(reti))) {
+            if (reti.is_finite()) {
               goodSolve = true;
             }
           }
