@@ -28,6 +28,12 @@ extern "C" bool qtest(SEXP in, const char *test) {
   return ret;
 }
 
+extern "C" SEXP _rxode2random_qtest_sexp(SEXP in, SEXP test) {
+  LogicalVector ret(1);
+  ret[0] = qtest(in, CHAR(test));
+  return wrap(ret);
+}
+
 // Modified by Matt
 extern "C" SEXP qstrictS(SEXP nn, const char *what) {
   BEGIN_RCPP
@@ -50,12 +56,22 @@ extern "C" SEXP qstrictS(SEXP nn, const char *what) {
   END_RCPP
 }
 
+extern "C" SEXP _rxode2random_qstrictS_sexp(SEXP in, SEXP test) {
+  return wrap(as<LogicalVector>(qstrictS(in, CHAR(test))));
+}
+
+
 extern "C" SEXP qstrictSn(SEXP x_, const char *what) {
   BEGIN_RCPP
   RObject x  = as<RObject>(x_);
   return qstrictS(as<SEXP>(x.attr("names")), what);
   END_RCPP
 }
+
+extern "C" SEXP _rxode2random_qstrictSn_sexp(SEXP in, SEXP test) {
+  return wrap(as<LogicalVector>(qstrictSn(in, CHAR(test))));
+}
+
 
 extern "C" SEXP qstrictSdn(SEXP x_, const char *what) {
   BEGIN_RCPP
@@ -72,6 +88,10 @@ extern "C" SEXP qstrictSdn(SEXP x_, const char *what) {
   }
   return qstrictS(as<SEXP>(names), what);
   END_RCPP
+}
+
+extern "C" SEXP _rxode2random_qstrictSdn_sexp(SEXP in, SEXP test) {
+  return wrap(as<LogicalVector>(qstrictSdn(in, CHAR(test))));
 }
 
 extern "C" SEXP qassertS(SEXP in, const char *test, const char *what) {
@@ -125,3 +145,8 @@ extern "C" SEXP qassertS(SEXP in, const char *test, const char *what) {
   return R_NilValue;
   END_RCPP
 }
+
+extern "C" SEXP _rxode2random_qassertS_sexp(SEXP in, SEXP test, SEXP w) {
+  return wrap(as<LogicalVector>(qassertS(in, CHAR(test), CHAR(w))));
+}
+

@@ -1045,3 +1045,36 @@ rxWithPreserveSeed <- function(code) {
 rxode2randomMd5 <- function() {
   rxode2random.md5  
 }
+
+
+### These are for accessing rxode2random without the abi dependency
+.qtest <- function(a, b) {
+  .Call(`_rxode2random_qtest_sexp`, a, b)
+}
+
+.qstrictS <- function(a, b) {
+  .Call(`_rxode2random_qstrictS_sexp`, a, b)
+}
+
+.qstrictSn <- function(a, b) {
+  .Call(`_rxode2random_qstrictSn_sexp`, a, b)
+}
+
+.qstrictSdn <- function(a, b) {
+  .Call(`_rxode2random_qstrictSdn_sexp`, a, b)
+}
+
+.qassertS <- function(a, b, c) {
+  .Call(`_rxode2random_qassertS_sexp`, a, b, c)
+}
+
+.convertId <- function(a) {
+  .Call(`_rxode2random_convertId_`, a)
+}
+
+.expandPars <- function(a, b, c, d) {
+  .Call(`_rxode2random_expandPars_`, a, b, c, d)
+}
+
+
+

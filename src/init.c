@@ -62,6 +62,11 @@ SEXP _rxode2random_qstrictSn(SEXP x_, const char *what);
 SEXP _rxode2random_qstrictSdn(SEXP x_, const char *what);
 
 SEXP _rxode2random_qassertS(SEXP in, const char *test, const char *what);
+SEXP _rxode2random_qtest_sexp(SEXP in, SEXP test);
+SEXP _rxode2random_qstrictS_sexp(SEXP, SEXP);
+SEXP _rxode2random_qassertS_sexp(SEXP, SEXP);
+SEXP _rxode2random_qstrictSn_sexp(SEXP in, SEXP test);
+SEXP _rxode2random_qstrictSdn_sexp(SEXP in, SEXP test);
 
 typedef SEXP (*lotriMat_type) (SEXP, SEXP, SEXP);
 typedef SEXP (*asLotriMat_type) (SEXP, SEXP, SEXP);
@@ -98,6 +103,7 @@ void _rxode2random_assignPtrsInRxode2(rx_solve rx,
 
 void R_init_rxode2random(DllInfo *info){
   R_CallMethodDef callMethods[]  = {
+    {"_rxode2random_qassertS_sexp", (DL_FUNC) &_rxode2random_qassertS_sexp, 3},
     {"_rxode2random_convertId_", (DL_FUNC) &_rxode2random_convertId_, 1},
     {"_rxode2random_vecDF", (DL_FUNC) &_rxode2random_vecDF, 2},
     {"_rxode2random_cbindOme", (DL_FUNC) &_rxode2random_cbindOme, 3},
@@ -140,6 +146,10 @@ void R_init_rxode2random(DllInfo *info){
     {"_rxode2random_rxordSelect", (DL_FUNC) &_rxode2random_rxordSelect, 2},
     {"_rxode2random_rxGetSeed", (DL_FUNC) &_rxode2random_rxGetSeed, 0},
     {"_rxode2random_phi", (DL_FUNC) &_rxode2random_phi, 1},
+    {"_rxode2random_qtest_sexp", (DL_FUNC) &_rxode2random_qtest_sexp, 2},
+    {"_rxode2random_qstrictS_sexp", (DL_FUNC) &_rxode2random_qstrictS_sexp, 2},
+    {"_rxode2random_qstrictSn_sexp", (DL_FUNC) &_rxode2random_qstrictSn_sexp, 2},
+    {"_rxode2random_qstrictSdn_sexp", (DL_FUNC) &_rxode2random_qstrictSdn_sexp, 2},
     {NULL, NULL, 0} 
   };
   // C callable to assign environments.
