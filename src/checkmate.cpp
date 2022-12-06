@@ -30,7 +30,7 @@ extern "C" bool qtest(SEXP in, const char *test) {
 
 extern "C" SEXP _rxode2random_qtest_sexp(SEXP in, SEXP test) {
   LogicalVector ret(1);
-  ret[0] = qtest(in, CHAR(test));
+  ret[0] = qtest(in, CHAR(STRING_ELT(test, 0)));
   return wrap(ret);
 }
 
@@ -57,7 +57,7 @@ extern "C" SEXP qstrictS(SEXP nn, const char *what) {
 }
 
 extern "C" SEXP _rxode2random_qstrictS_sexp(SEXP in, SEXP test) {
-  return wrap(as<LogicalVector>(qstrictS(in, CHAR(test))));
+  return wrap(as<LogicalVector>(qstrictS(in, CHAR(STRING_ELT(test, 0)))));
 }
 
 
@@ -69,7 +69,7 @@ extern "C" SEXP qstrictSn(SEXP x_, const char *what) {
 }
 
 extern "C" SEXP _rxode2random_qstrictSn_sexp(SEXP in, SEXP test) {
-  return wrap(as<LogicalVector>(qstrictSn(in, CHAR(test))));
+  return wrap(as<LogicalVector>(qstrictSn(in, CHAR(STRING_ELT(test, 0)))));
 }
 
 
@@ -91,7 +91,7 @@ extern "C" SEXP qstrictSdn(SEXP x_, const char *what) {
 }
 
 extern "C" SEXP _rxode2random_qstrictSdn_sexp(SEXP in, SEXP test) {
-  return wrap(as<LogicalVector>(qstrictSdn(in, CHAR(test))));
+  return wrap(as<LogicalVector>(qstrictSdn(in, CHAR(STRING_ELT(test, 0)))));
 }
 
 extern "C" SEXP qassertS(SEXP in, const char *test, const char *what) {
@@ -147,6 +147,6 @@ extern "C" SEXP qassertS(SEXP in, const char *test, const char *what) {
 }
 
 extern "C" SEXP _rxode2random_qassertS_sexp(SEXP in, SEXP test, SEXP w) {
-  return wrap(as<LogicalVector>(qassertS(in, CHAR(test), CHAR(w))));
+  return qassertS(in, CHAR(STRING_ELT(test, 0)), CHAR(STRING_ELT(w, 0)));
 }
 
