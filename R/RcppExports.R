@@ -8,8 +8,8 @@
 #' @param nu degrees of freedom of inverse chi square
 #' 
 #' @param scale  Scale of inverse chi squared distribution 
-NULL
-
+#'         (default is 1).
+#' 
 #' @return a vector of inverse chi squared deviates.
 #' 
 #' @examples

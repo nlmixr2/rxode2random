@@ -86,6 +86,31 @@ typedef SEXP (*getLowerVec_t)(int type, rx_solve* rx);
 typedef SEXP (*getUpperVec_t)(int type, rx_solve* rx);
 typedef SEXP (*getArmaMat_t)(int type, int csim, rx_solve* rx);
 
+SEXP _rxode2random_funPtrs(void) {
+  int pro = 0;
+  SEXP ret = PROTECT(allocVector(VECSXP, 5)); pro++;
+  SET_VECTOR_ELT(ret, 0, R_MakeExternalPtrFn((DL_FUNC) &_rxode2random_getRxSeed1,
+                                             Rf_install("_rxode2random_getRxSeed1"),
+                                             R_NilValue));
+  SET_VECTOR_ELT(ret, 1, R_MakeExternalPtrFn((DL_FUNC) &_rxode2random_setSeedEng1,
+                                             Rf_install("_rxode2random_setSeedEng1"),
+                                             R_NilValue));
+  SET_VECTOR_ELT(ret, 2, R_MakeExternalPtrFn((DL_FUNC) &_rxode2random_setRxSeedFinal,
+                                             Rf_install("_rxode2random_setRxSeedFinal"),
+                                             R_NilValue));
+  SET_VECTOR_ELT(ret, 3, R_MakeExternalPtrFn((DL_FUNC) &_rxode2random_seedEng,
+                                             Rf_install("_rxode2random_seedEng"),
+                                             R_NilValue));
+  SET_VECTOR_ELT(ret, 4, R_MakeExternalPtrFn((DL_FUNC) &rxunif,
+                                             Rf_install("rxunif"),
+                                             R_NilValue));
+  SEXP cls = PROTECT(Rf_allocVector(STRSXP, 1)); pro++;
+  SET_STRING_ELT(cls, 0, Rf_mkChar("rxode2randomFunPtrs"));
+  Rf_setAttrib(ret,R_ClassSymbol, cls);
+  UNPROTECT(pro);
+  return(ret);
+}
+
 void _rxode2random_assignPtrsInRxode2(rx_solve rx,
                                       rx_solving_options op,
                                       rxSolveFreeSexp_t rSF,
@@ -103,6 +128,7 @@ void _rxode2random_assignPtrsInRxode2(rx_solve rx,
 
 void R_init_rxode2random(DllInfo *info){
   R_CallMethodDef callMethods[]  = {
+    {"_rxode2random_funPtrs", (DL_FUNC) &_rxode2random_funPtrs, 0},
     {"_rxode2random_qassertS_sexp", (DL_FUNC) &_rxode2random_qassertS_sexp, 3},
     {"_rxode2random_convertId_", (DL_FUNC) &_rxode2random_convertId_, 1},
     {"_rxode2random_vecDF", (DL_FUNC) &_rxode2random_vecDF, 2},

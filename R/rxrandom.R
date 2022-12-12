@@ -1076,5 +1076,6 @@ rxode2randomMd5 <- function() {
   .Call(`_rxode2random_expandPars_`, a, b, c, d)
 }
 
-
-
+.funPtrs <- function() {
+  .Call(`_rxode2random_funPtrs`)
+}

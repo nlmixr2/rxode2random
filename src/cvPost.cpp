@@ -202,8 +202,8 @@ NumericMatrix cvPost0(double nu, NumericMatrix omega, bool omegaIsChol = false,
 //' @param nu degrees of freedom of inverse chi square
 //' 
 //' @param scale  Scale of inverse chi squared distribution 
-    //'         (default is 1).
-    //' 
+//'         (default is 1).
+//' 
 //' @return a vector of inverse chi squared deviates.
 //' 
 //' @examples
