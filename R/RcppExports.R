@@ -88,10 +88,6 @@ nestingInfo_ <- function(omega, data) {
     .Call(`_rxode2random_nestingInfo_`, omega, data)
 }
 
-convertId_ <- function(x) {
-    .Call(`_rxode2random_convertId_`, x)
-}
-
 rxRmvn_ <- function(A_, mu, sigma, ncores = 1L, isChol = FALSE) {
     .Call(`_rxode2random_rxRmvn_`, A_, mu, sigma, ncores, isChol)
 }

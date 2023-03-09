@@ -54,7 +54,6 @@ SEXP _rxode2random_phi(SEXP q);
 SEXP _rxode2random_rxSetSeed(SEXP);
 SEXP _rxode2random_cbindOme(SEXP, SEXP, SEXP);
 SEXP _rxode2random_vecDF(SEXP, SEXP);
-SEXP _rxode2random_convertId_(SEXP);
 
 bool _rxode2random_qtest(SEXP in, const char *test);
 SEXP _rxode2random_qstrictS(SEXP nn, const char *what);
@@ -130,7 +129,6 @@ void R_init_rxode2random(DllInfo *info){
   R_CallMethodDef callMethods[]  = {
     {"_rxode2random_funPtrs", (DL_FUNC) &_rxode2random_funPtrs, 0},
     {"_rxode2random_qassertS_sexp", (DL_FUNC) &_rxode2random_qassertS_sexp, 3},
-    {"_rxode2random_convertId_", (DL_FUNC) &_rxode2random_convertId_, 1},
     {"_rxode2random_vecDF", (DL_FUNC) &_rxode2random_vecDF, 2},
     {"_rxode2random_cbindOme", (DL_FUNC) &_rxode2random_cbindOme, 3},
     {"_rxode2random_rxSetSeed", (DL_FUNC) &_rxode2random_rxSetSeed, 1},
@@ -181,8 +179,6 @@ void R_init_rxode2random(DllInfo *info){
   // C callable to assign environments.
   R_RegisterCCallable("rxode2random", "_rxode2random_assignPtrsInRxode2", (DL_FUNC) &_rxode2random_assignPtrsInRxode2);
   R_RegisterCCallable("rxode2random", "_rxode2random_cbindOme", (DL_FUNC) &_rxode2random_cbindOme);
-  R_RegisterCCallable("rxode2random", "_rxode2random_convertId_", (DL_FUNC) &_rxode2random_convertId_);
-  R_RegisterCCallable("rxode2random", "_rxode2random_convertId_", (DL_FUNC) &_rxode2random_convertId_);
   R_RegisterCCallable("rxode2random", "_rxode2random_cvPost_", (DL_FUNC) &_rxode2random_cvPost_);
   R_RegisterCCallable("rxode2random", "_rxode2random_expandPars_", (DL_FUNC) &_rxode2random_expandPars_);
   R_RegisterCCallable("rxode2random", "_rxode2random_expandTheta_", (DL_FUNC) &_rxode2random_expandTheta_);
