@@ -1068,10 +1068,6 @@ rxode2randomMd5 <- function() {
   .Call(`_rxode2random_qassertS_sexp`, a, b, c)
 }
 
-.convertId <- function(a) {
-  .Call(`_rxode2random_convertId_`, a)
-}
-
 .expandPars <- function(a, b, c, d) {
   .Call(`_rxode2random_expandPars_`, a, b, c, d)
 }
