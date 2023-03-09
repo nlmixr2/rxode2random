@@ -10,3 +10,6 @@
 ^pkgdown
 ^workaround.Rout$
 
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

@@ -5,8 +5,7 @@
 
 <!-- badges: start -->
 
-[![R build
-status](https://github.com/nlmixr2/rxode2random/workflows/R-CMD-check/badge.svg)](https://github.com/nlmixr2/rxode2random/actions)
+[![R-CMD-check](https://github.com/nlmixr2/rxode2random/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/nlmixr2/rxode2random/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/gh/nlmixr2/rxode2random/branch/main/graph/badge.svg?token=1mPFeTxSwS)](https://codecov.io/gh/nlmixr2/rxode2random)
 [![CRAN
 version](http://www.r-pkg.org/badges/version/rxode2random)](https://cran.r-project.org/package=rxode2random)
