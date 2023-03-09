@@ -19,7 +19,8 @@ Imports:
     stats,
     Rcpp,
     checkmate,
-    lotri
+    lotri,
+    rxode2parse (> 2.0.13)
 Suggests:
     testthat (>= 3.0.0)
 LinkingTo:
