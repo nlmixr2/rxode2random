@@ -122,7 +122,7 @@ SEXP assignConvertId(void) {
     Function funPtrs = rxode2parse[".rxode2parseFunPtrs"];
     List ptr = as<List>(funPtrs());
     convertId_ = (convertId_type)(R_ExternalPtrAddr(ptr[0]));
-    get_sexp_uniqueL = (get_sexp_uniqueL_type)(R_ExternalPtrAddr(ptr[1]));
+    get_sexp_uniqueL = (get_sexp_uniqueL_type)(R_ExternalPtrAddr(ptr[6]));
   }
   END_RCPP
 }
