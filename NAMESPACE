@@ -2,6 +2,7 @@
 
 export(.cbindOme)
 export(.convertId)
+export(.expandPars)
 export(.vecDf)
 export(cvPost)
 export(invWR1d)

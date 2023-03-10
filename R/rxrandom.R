@@ -1068,8 +1068,21 @@ rxode2randomMd5 <- function() {
   .Call(`_rxode2random_qassertS_sexp`, a, b, c)
 }
 
-.expandPars <- function(a, b, c, d) {
-  .Call(`_rxode2random_expandPars_`, a, b, c, d)
+
+
+#' Expand parameters
+#'
+#'  
+#' @param object rxode2 model variables object
+#' @param params parameters to expand
+#' @param events event table to help with the expansion
+#' @param control control structure to help with the parameter generation
+#' @return Expanded parameters for simulation
+#' @export 
+#' @author Matthew L. Fidler
+#' @keywords internal
+.expandPars <- function(object, params, events, control) {
+  .Call(`_rxode2random_expandPars_`, object, params, events, control)
 }
 
 .funPtrs <- function() {

@@ -10,6 +10,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include <rxode2parse.h>
 #include "../inst/include/rxode2random_as.h"
+
 extern "C"{
   typedef int (*get_sexp_uniqueL_type)(SEXP s);
   get_sexp_uniqueL_type get_sexp_uniqueL;
