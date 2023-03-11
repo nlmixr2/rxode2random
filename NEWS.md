@@ -1,4 +1,6 @@
-# rxode2random (development version)
+# rxode2random 2.0.10
+
+- Moved fast factor to `rxode2parse` to allow `etTrans` to be moved there
 
 # rxode2random 2.0.9
 
