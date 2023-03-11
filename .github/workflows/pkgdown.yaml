@@ -38,6 +38,8 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
+          cache-version: 2
+          pak-version: stable
           extra-packages: |
             any::pkgdown
             nlmixr2/lotri
