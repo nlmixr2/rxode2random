@@ -42,6 +42,7 @@ jobs:
           pak-version: stable
           extra-packages: |
             any::pkgdown
+            nlmixr2/dparser-R
             nlmixr2/lotri
             nlmixr2/rxode2parse
             local::.
