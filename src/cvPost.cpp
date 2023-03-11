@@ -10,7 +10,10 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include <rxode2parse.h>
 #include "../inst/include/rxode2random_as.h"
+
 extern "C"{
+  typedef int (*get_sexp_uniqueL_type)(SEXP s);
+  get_sexp_uniqueL_type get_sexp_uniqueL;
   typedef SEXP (*lotriMat_type) (SEXP, SEXP, SEXP);
   lotriMat_type lotriMat;
   typedef SEXP (*asLotriMat_type) (SEXP, SEXP, SEXP);
@@ -79,7 +82,6 @@ extern "C"{
     rxModelsAssign         = rmac;
     rxModelVars_           = mv;
   }
-
 }
 
 List etTrans(List inData, const RObject &obj, bool addCmt=false,
@@ -102,7 +104,29 @@ List rxExpandNesting(const RObject& obj, List& nestingInfo,
 extern "C" SEXP _cbindOme(SEXP et_, SEXP mat_, SEXP n_);
 
 extern "C" SEXP _vecDF(SEXP cv, SEXP n_);
-SEXP convertId_(SEXP x);
+
+typedef SEXP (*convertId_type)(SEXP x);
+
+bool convertId_assigned = false;
+convertId_type convertId_;
+
+Function loadNamespace("loadNamespace", R_BaseNamespace);
+bool rxode2parse_loaded = false;
+Environment rxode2parse;
+
+
+SEXP assignConvertId(void) {
+  BEGIN_RCPP
+  if (!rxode2parse_loaded) {
+    rxode2parse = loadNamespace("rxode2parse");
+    rxode2parse_loaded = true;
+    Function funPtrs = rxode2parse[".rxode2parseFunPtrs"];
+    List ptr = as<List>(funPtrs());
+    convertId_ = (convertId_type)(R_ExternalPtrAddr(ptr[0]));
+    get_sexp_uniqueL = (get_sexp_uniqueL_type)(R_ExternalPtrAddr(ptr[6]));
+  }
+  END_RCPP
+}
 
 SEXP rxRmvnSEXP(SEXP nS, SEXP muS, SEXP sigmaS,
                 SEXP lowerS, SEXP upperS, SEXP ncoresS, SEXP isCholS,
@@ -1119,7 +1143,6 @@ SEXP expandPars_(SEXP objectS, SEXP paramsS, SEXP eventsS, SEXP controlS) {
   return et;
 }
 
-int get_sexp_uniqueL( SEXP s );
 int factor2( IntegerVector col, IntegerVector id) {
   IntegerVector x1(id.size());
   for (int i = id.size(); i--;) {
@@ -1130,6 +1153,10 @@ int factor2( IntegerVector col, IntegerVector id) {
 
 
 SEXP nestingInfoSingle_(SEXP col, IntegerVector id) {
+  if (!convertId_assigned) {
+    assignConvertId();
+    convertId_assigned=true;
+  }
   SEXP f2 = PROTECT(convertId_(col));
   int l1 = factor2(f2, id);
   int lid = Rf_length(Rf_getAttrib(id, R_LevelsSymbol));
@@ -1169,6 +1196,10 @@ SEXP nestingInfoSingle_(SEXP col, IntegerVector id) {
 //[[Rcpp::export]]
 SEXP nestingInfo_(SEXP omega, List data) {
   // Might need to clone...
+  if (!convertId_assigned) {
+    assignConvertId();
+    convertId_assigned=true;
+  }
   int pro = 0;
   CharacterVector lName = data.names();
   int wid = -1;
