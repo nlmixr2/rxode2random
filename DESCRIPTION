@@ -6,6 +6,7 @@ Authors@R: c(
            comment = c(ORCID = "0000-0001-8538-6691")),
           person("Wenping", "Wang", , "wwang8198@gmail.com", role = "ctb"),
           person("Bill", "Denney", email="wdenney@humanpredictions.com", role="ctb", comment=c(ORCID="0000-0002-5759-428X"))
+          )
 Description: Provides the random number generation (in parallel) needed for
    'rxode2' (Wang, Hallow and  James (2016) <doi:10.1002/psp4.12052>) and 'nlmixr2'
     (Fidler et al (2019) <doi:10.1002/psp4.12445>).
