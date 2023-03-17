@@ -7,7 +7,7 @@
 
 [![R build
 status](https://github.com/nlmixr2/rxode2random/workflows/R-CMD-check/badge.svg)](https://github.com/nlmixr2/rxode2random/actions)
-[![codecov](https://codecov.io/gh/nlmixr2/rxode2random/branch/main/graph/badge.svg?token=1mPFeTxSwS)](https://codecov.io/gh/nlmixr2/rxode2random)
+[![codecov](https://codecov.io/gh/nlmixr2/rxode2random/branch/main/graph/badge.svg?token=1mPFeTxSwS)](https://app.codecov.io/gh/nlmixr2/rxode2random)
 [![CRAN
 version](http://www.r-pkg.org/badges/version/rxode2random)](https://cran.r-project.org/package=rxode2random)
 [![CRAN total
