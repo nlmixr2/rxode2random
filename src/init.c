@@ -63,7 +63,7 @@ SEXP _rxode2random_qstrictSdn(SEXP x_, const char *what);
 SEXP _rxode2random_qassertS(SEXP in, const char *test, const char *what);
 SEXP _rxode2random_qtest_sexp(SEXP in, SEXP test);
 SEXP _rxode2random_qstrictS_sexp(SEXP, SEXP);
-SEXP _rxode2random_qassertS_sexp(SEXP, SEXP);
+SEXP _rxode2random_qassertS_sexp(SEXP, SEXP, SEXP);
 SEXP _rxode2random_qstrictSn_sexp(SEXP in, SEXP test);
 SEXP _rxode2random_qstrictSdn_sexp(SEXP in, SEXP test);
 

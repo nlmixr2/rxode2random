@@ -1,3 +1,7 @@
+# rxode2random 2.0.11
+
+- Fix qassert LTO
+
 # rxode2random 2.0.10
 
 - Moved fast factor to `rxode2parse` to allow `etTrans` to be moved there
