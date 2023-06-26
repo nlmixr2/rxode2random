@@ -151,13 +151,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // omegaListRse
-Rcpp::List omegaListRse(Rcpp::List omegaList);
-RcppExport SEXP _rxode2random_omegaListRse(SEXP omegaListSEXP) {
+Rcpp::List omegaListRse(RObject omegaIn);
+RcppExport SEXP _rxode2random_omegaListRse(SEXP omegaInSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::List >::type omegaList(omegaListSEXP);
-    rcpp_result_gen = Rcpp::wrap(omegaListRse(omegaList));
+    Rcpp::traits::input_parameter< RObject >::type omegaIn(omegaInSEXP);
+    rcpp_result_gen = Rcpp::wrap(omegaListRse(omegaIn));
     return rcpp_result_gen;
 END_RCPP
 }

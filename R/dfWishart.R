@@ -1,5 +1,7 @@
 dfWishartCalcRse <- function(nu, omega, totN, rse) {
   .cv <- cvPost(nu, omega, totN)
+  #.cv <- ivdoctr:::rinvwish(totN, nu, omega)
+  #print(.cv)
   max(omegaListRse(.cv)$rse)-rse
 }
 

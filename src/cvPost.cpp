@@ -1317,15 +1317,37 @@ SEXP nestingInfo_(SEXP omega, List data) {
 
 
 //[[Rcpp::export]]
-Rcpp::List omegaListRse(Rcpp::List omegaList) {
-  arma::mat oldM = as<arma::mat>(omegaList[0]);
+Rcpp::List omegaListRse(RObject omegaIn) {
+  arma::cube omegaCube;
+  Rcpp::List omegaList;
+  bool useList = false;
+  int ntot;
+  if (omegaIn.hasAttribute("dim")) {
+    omegaCube = as<arma::cube>(omegaIn);
+    ntot = omegaCube.n_slices;
+  } else {
+    omegaList = as<Rcpp::List>(omegaIn);
+    useList = true;
+    ntot = omegaList.size();
+  }
+  arma::mat oldM;
+  if (useList) {
+    oldM = as<arma::mat>(omegaList[0]);
+  } else {
+    oldM = omegaCube.slice(0);
+  }
   arma::mat newM = oldM;
   arma::mat oldS(oldM.n_rows, oldM.n_rows, arma::fill::zeros);
   arma::mat newS = oldS;
   int m = 1;
-  for (unsigned int i = 1; i < omegaList.size(); i++) {
+  for (unsigned int i = 1; i < ntot; i++) {
     m++;
-    arma::mat x = as<arma::mat>(omegaList[i]);
+    arma::mat x;
+    if (useList) {
+      x = as<arma::mat>(omegaList[i]);
+    } else {
+      x = omegaCube.slice(i);
+    }
     newM = oldM + (x-oldM)/m;
     newS = oldS + (x-oldM)*(x-newM);
     oldM = newM;
