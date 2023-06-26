@@ -1312,3 +1312,29 @@ SEXP nestingInfo_(SEXP omega, List data) {
                            _["extraTheta"]=extraTheta,
                            _["extraEta"]=extraEta));
 }
+
+
+
+
+//[[Rcpp::export]]
+Rcpp::List omegaListRse(Rcpp::List omegaList) {
+  arma::mat oldM = as<arma::mat>(omegaList[0]);
+  arma::mat newM = oldM;
+  arma::mat oldS(oldM.n_rows, oldM.n_rows, arma::fill::zeros);
+  arma::mat newS = oldS;
+  int m = 1;
+  for (unsigned int i = 1; i < omegaList.size(); i++) {
+    m++;
+    arma::mat x = as<arma::mat>(omegaList[i]);
+    newM = oldM + (x-oldM)/m;
+    newS = oldS + (x-oldM)*(x-newM);
+    oldM = newM;
+    oldS = newS;
+  }
+  arma::mat var = newS/(m-1);
+  arma::mat sd = sqrt(var);
+  return List::create(_["mean"] = wrap(newM),
+                      _["var"] = wrap(var),
+                      _["sd"] = wrap(sd),
+                      _["rse"]= wrap(sd/newM));
+}
