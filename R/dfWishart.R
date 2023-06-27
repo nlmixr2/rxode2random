@@ -2,10 +2,11 @@ dfWishartCalcRse <- function(nu, omega, totN, rse) {
   .cv <- cvPost(nu, omega, totN)
   #.cv <- ivdoctr:::rinvwish(totN, nu, omega)
   #print(.cv)
-  max(omegaListRse(.cv)$rse)-rse
+  #max(omegaListRse(.cv)$rse)-rse
+  mean(diag(omegaListRse(.cv)$sd))-rse
 }
 
-dfWishart <- function(omega, n, rse, totN=10000) {
+dfWishart <- function(omega, n, rse, totN=1000) {
   checkmate::assertMatrix(omega, "numeric", min.rows=1, min.cols=1)
   checkmate::assertIntegerish(n, len=1, lower=1)
   checkmate::assertIntegerish(totN, len=1, lower=1)
