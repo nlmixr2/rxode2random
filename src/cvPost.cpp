@@ -1313,8 +1313,27 @@ SEXP nestingInfo_(SEXP omega, List data) {
                            _["extraEta"]=extraEta));
 }
 
-
-
+//[[Rcpp::export]]
+RObject swapMatListWithCube_(RObject inO) {
+  Rcpp::List omegaList;
+  if (inO.hasAttribute("dim")) {
+    arma::cube omegaCube = as<arma::cube>(inO);
+    Rcpp::List omegaList(omegaCube.n_slices);
+    for (int i = 0; i < omegaList.size(); ++i) {
+      omegaList[i] = wrap(omegaCube.slice(i));
+    }
+    return wrap(omegaList);
+  } else {
+    Rcpp::List omegaList = as<Rcpp::List>(inO);
+    arma::mat n0 = as<arma::mat>(omegaList[0]);
+    arma::cube omegaCube(n0.n_rows, n0.n_cols, omegaList.size());
+    for (int i = 0; i < omegaList.size(); ++i) {
+      omegaCube.slice(i) = as<arma::mat>(omegaList[i]);
+    }
+    return wrap(omegaCube);
+  }
+  return R_NilValue;
+}
 
 //[[Rcpp::export]]
 Rcpp::List omegaListRse(RObject omegaIn) {

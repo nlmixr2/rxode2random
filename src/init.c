@@ -12,6 +12,7 @@
 #include "rxthreefry.h"
 #include "seed.h"
 
+SEXP _rxode2random_swapMatListWithCube_(SEXP);
 SEXP _rxode2random_omegaListRse(SEXP omegaList);
 SEXP _rxode2random_rinvchisq(SEXP nSEXP, SEXP nuSEXP, SEXP scaleSEXP);
 SEXP _rxode2random_rLKJ1(SEXP dSEXP, SEXP etaSEXP, SEXP choleskySEXP);
@@ -128,6 +129,7 @@ void _rxode2random_assignPtrsInRxode2(rx_solve rx,
 
 void R_init_rxode2random(DllInfo *info){
   R_CallMethodDef callMethods[]  = {
+    {"_rxode2random_swapMatListWithCube_", (DL_FUNC) &_rxode2random_swapMatListWithCube_, 1},
     {"_rxode2random_omegaListRse", (DL_FUNC) &_rxode2random_omegaListRse, 1},
     {"_rxode2random_funPtrs", (DL_FUNC) &_rxode2random_funPtrs, 0},
     {"_rxode2random_qassertS_sexp", (DL_FUNC) &_rxode2random_qassertS_sexp, 3},

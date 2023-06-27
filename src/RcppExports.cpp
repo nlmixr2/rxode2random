@@ -150,6 +150,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// swapMatListWithCube_
+RObject swapMatListWithCube_(RObject inO);
+RcppExport SEXP _rxode2random_swapMatListWithCube_(SEXP inOSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< RObject >::type inO(inOSEXP);
+    rcpp_result_gen = Rcpp::wrap(swapMatListWithCube_(inO));
+    return rcpp_result_gen;
+END_RCPP
+}
 // omegaListRse
 Rcpp::List omegaListRse(RObject omegaIn);
 RcppExport SEXP _rxode2random_omegaListRse(SEXP omegaInSEXP) {
