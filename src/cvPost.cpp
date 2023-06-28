@@ -1312,3 +1312,70 @@ SEXP nestingInfo_(SEXP omega, List data) {
                            _["extraTheta"]=extraTheta,
                            _["extraEta"]=extraEta));
 }
+
+//[[Rcpp::export]]
+RObject swapMatListWithCube_(RObject inO) {
+  Rcpp::List omegaList;
+  if (inO.hasAttribute("dim")) {
+    arma::cube omegaCube = as<arma::cube>(inO);
+    Rcpp::List omegaList(omegaCube.n_slices);
+    for (int i = 0; i < omegaList.size(); ++i) {
+      omegaList[i] = wrap(omegaCube.slice(i));
+    }
+    return wrap(omegaList);
+  } else {
+    Rcpp::List omegaList = as<Rcpp::List>(inO);
+    arma::mat n0 = as<arma::mat>(omegaList[0]);
+    arma::cube omegaCube(n0.n_rows, n0.n_cols, omegaList.size());
+    for (int i = 0; i < omegaList.size(); ++i) {
+      omegaCube.slice(i) = as<arma::mat>(omegaList[i]);
+    }
+    return wrap(omegaCube);
+  }
+  return R_NilValue;
+}
+
+//[[Rcpp::export]]
+Rcpp::List omegaListRse(RObject omegaIn) {
+  arma::cube omegaCube;
+  Rcpp::List omegaList;
+  bool useList = false;
+  int ntot;
+  if (omegaIn.hasAttribute("dim")) {
+    omegaCube = as<arma::cube>(omegaIn);
+    ntot = omegaCube.n_slices;
+  } else {
+    omegaList = as<Rcpp::List>(omegaIn);
+    useList = true;
+    ntot = omegaList.size();
+  }
+  arma::mat oldM;
+  if (useList) {
+    oldM = as<arma::mat>(omegaList[0]);
+  } else {
+    oldM = omegaCube.slice(0);
+  }
+  arma::mat newM = oldM;
+  arma::mat oldS(oldM.n_rows, oldM.n_rows, arma::fill::zeros);
+  arma::mat newS = oldS;
+  int m = 1;
+  for (unsigned int i = 1; i < ntot; i++) {
+    m++;
+    arma::mat x;
+    if (useList) {
+      x = as<arma::mat>(omegaList[i]);
+    } else {
+      x = omegaCube.slice(i);
+    }
+    newM = oldM + (x-oldM)/m;
+    newS = oldS + (x-oldM)*(x-newM);
+    oldM = newM;
+    oldS = newS;
+  }
+  arma::mat var = newS/(m-1);
+  arma::mat sd = sqrt(var);
+  return List::create(_["mean"] = wrap(newM),
+                      _["var"] = wrap(var),
+                      _["sd"] = wrap(sd),
+                      _["rse"]= wrap(sd/newM));
+}

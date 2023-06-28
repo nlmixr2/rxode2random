@@ -88,6 +88,14 @@ nestingInfo_ <- function(omega, data) {
     .Call(`_rxode2random_nestingInfo_`, omega, data)
 }
 
+swapMatListWithCube_ <- function(inO) {
+    .Call(`_rxode2random_swapMatListWithCube_`, inO)
+}
+
+omegaListRse <- function(omegaIn) {
+    .Call(`_rxode2random_omegaListRse`, omegaIn)
+}
+
 rxRmvn_ <- function(A_, mu, sigma, ncores = 1L, isChol = FALSE) {
     .Call(`_rxode2random_rxRmvn_`, A_, mu, sigma, ncores, isChol)
 }
