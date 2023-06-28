@@ -1316,21 +1316,41 @@ SEXP nestingInfo_(SEXP omega, List data) {
 //[[Rcpp::export]]
 RObject swapMatListWithCube_(RObject inO) {
   Rcpp::List omegaList;
-  if (inO.hasAttribute("dim")) {
+  if (inO.hasAttribute("dimnames")) {
+    Rcpp::List dimNamesFinal(2);
+    Rcpp::List dimNamesCur = inO.attr("dimnames");
+    dimNamesFinal[0] = dimNamesCur[0];
+    dimNamesFinal[1] = dimNamesCur[1];
     arma::cube omegaCube = as<arma::cube>(inO);
     Rcpp::List omegaList(omegaCube.n_slices);
     for (int i = 0; i < omegaList.size(); ++i) {
-      omegaList[i] = wrap(omegaCube.slice(i));
+      RObject cur = wrap(omegaCube.slice(i));
+      cur.attr("dimnames") = dimNamesFinal;
+      omegaList[i] = cur;
     }
     return wrap(omegaList);
   } else {
     Rcpp::List omegaList = as<Rcpp::List>(inO);
+    RObject ro0 = omegaList[0];
     arma::mat n0 = as<arma::mat>(omegaList[0]);
+    Rcpp::List dimNamesFinal(3);
+    bool hasDim = false;
+    if (ro0.hasAttribute("dimnames")) {
+      Rcpp::List dimNamesCur = ro0.attr("dimnames");
+      if (dimNamesCur.size() == 2) {
+        dimNamesFinal[0] = dimNamesCur[0];
+        dimNamesFinal[1] = dimNamesCur[1];
+        dimNamesFinal[2] = R_NilValue;
+      }
+      hasDim = true;
+    }
     arma::cube omegaCube(n0.n_rows, n0.n_cols, omegaList.size());
     for (int i = 0; i < omegaList.size(); ++i) {
       omegaCube.slice(i) = as<arma::mat>(omegaList[i]);
     }
-    return wrap(omegaCube);
+    RObject cur = wrap(omegaCube);
+    if (hasDim) cur.attr("dimnames") = dimNamesFinal;
+    return cur;
   }
   return R_NilValue;
 }
@@ -1340,7 +1360,7 @@ Rcpp::List omegaListRse(RObject omegaIn) {
   arma::cube omegaCube;
   Rcpp::List omegaList;
   bool useList = false;
-  int ntot;
+  unsigned int ntot=0;
   if (omegaIn.hasAttribute("dim")) {
     omegaCube = as<arma::cube>(omegaIn);
     ntot = omegaCube.n_slices;
