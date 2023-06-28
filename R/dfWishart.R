@@ -20,8 +20,13 @@ dfWishartCalcRse <- function(nu, omega, totN, rse, diag=TRUE) {
 #'   it is derived from `n`
 #' @param upper The upper boundary for root finding in terms of
 #'   degrees of freedom.  If not specified, it is n*200
-#' @param totN This represents the total number of simulated inverse wishart deviates
-#' @param diag When `TRUE`, represents the rse to match is the diagonals, otherwise it is the total matrix.
+#' @param totN This represents the total number of simulated inverse
+#'   wishart deviates
+#' @param diag When `TRUE`, represents the rse to match is the
+#'   diagonals, otherwise it is the total matrix.
+#' @param seed to make the simulation reproducible, this represents
+#'   the seed that is used for simulating the inverse Wishart
+#'   distribution
 #' @return output from `uniroot()` to find the right estimate
 #' @export
 #' @author Matthew L. Fidler

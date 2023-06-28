@@ -19,9 +19,15 @@ it is derived from \code{n}}
 \item{upper}{The upper boundary for root finding in terms of
 degrees of freedom.  If not specified, it is n*200}
 
-\item{totN}{This represents the total number of simulated inverse wishart deviates}
+\item{totN}{This represents the total number of simulated inverse
+wishart deviates}
 
-\item{diag}{When \code{TRUE}, represents the rse to match is the diagonals, otherwise it is the total matrix.}
+\item{diag}{When \code{TRUE}, represents the rse to match is the
+diagonals, otherwise it is the total matrix.}
+
+\item{seed}{to make the simulation reproducible, this represents
+the seed that is used for simulating the inverse Wishart
+distribution}
 }
 \value{
 output from \code{uniroot()} to find the right estimate
