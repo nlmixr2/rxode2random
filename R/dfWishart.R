@@ -10,7 +10,7 @@ dfWishartCalcRse <- function(nu, omega, totN, rse, diag=TRUE) {
   }
 }
 
-#' This uses simulations to match the rse 
+#' This uses simulations to match the rse
 #'
 #' @param omega represents the matrix for simulation
 #' @param n This represents the number of subjects/samples this comes
@@ -33,7 +33,7 @@ dfWishartCalcRse <- function(nu, omega, totN, rse, diag=TRUE) {
 #' @examples
 #'
 #' dfWishart(lotri::lotri(a+b~c(1, 0.5, 1)), 100)
-#' 
+#'
 dfWishart <- function(omega, n, rse, upper, totN=1000, diag=TRUE, seed=1234) {
   checkmate::assertMatrix(omega, "numeric", min.rows=1, min.cols=1)
   if (!missing(rse) && !missing(n)) {
@@ -63,4 +63,36 @@ dfWishart <- function(omega, n, rse, upper, totN=1000, diag=TRUE, seed=1234) {
   rxWithSeed(seed, {
     uniroot(dfWishartCalcRse, lower=.lower, upper=.upper, omega=omega, totN=totN, rse=rse, diag=diag)
   })
+}
+#' Swaps the matrix list with a cube
+#'
+#' @param matrixListOrCube Either a list of 2-dimensional matrices or a cube of matrices
+#' @return A list or a cube (opposite format as input)
+#' @export
+#' @author Matthew L. Fidler
+#' @examples
+#'
+#' # Create matrix list
+#' matLst <- cvPost(10, lotri::lotri(a+b~c(1, 0.25, 1)), 3)
+#' print(matLst)
+#'
+#' # Convert to cube
+#' matCube <- swapMatListWithCube(matLst)
+#' print(matCube)
+#'
+#' # Convert back to list
+#' matLst2 <- swapMatListWithCube(matCube)
+#' print(matLst2)
+#'
+swapMatListWithCube <- function(matrixListOrCube) {
+  .dim <- dim(matrixListOrCube)
+  if (length(.dim) == 3L) {
+    return(.Call(`_rxode2random_swapMatListWithCube_`, matrixListOrCube))
+  } else if (length(.dim) > 0L) {
+  } else if (inherits(matrixListOrCube, "list") && length(matrixListOrCube) > 0L) {
+    .m0 <- matrixListOrCube[[1]]
+    .dim <- dim(.m0)
+    if (length(.dim) == 2L)     return(.Call(`_rxode2random_swapMatListWithCube_`, matrixListOrCube))
+  }
+  stop("The input must be a cube or a list of matrices", call.=FALSE)
 }
