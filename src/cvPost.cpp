@@ -32,7 +32,9 @@ extern "C"{
   rxSolveFreeSexp_t rxSolveFree;
   typedef void (*setZeroMatrix_t)(int which);
   setZeroMatrix_t  setZeroMatrix;
-  typedef SEXP (*etTrans_t)(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+  typedef SEXP (*etTrans_t)(SEXP, SEXP, SEXP, SEXP, SEXP,
+                            SEXP, SEXP, SEXP, SEXP, SEXP,
+                            SEXP);
   etTrans_t etTransSexp;
   typedef void (*rxModelsAssignC_t)(const char* str, SEXP assign);
   rxModelsAssignC_t rxModelsAssign;
@@ -87,9 +89,13 @@ extern "C"{
 List etTrans(List inData, const RObject &obj, bool addCmt=false,
              bool dropUnits=false, bool allTimeVar=false,
              bool keepDosingOnly=false, Nullable<LogicalVector> combineDvid=R_NilValue,
-             CharacterVector keep = CharacterVector(0)) {
+             CharacterVector keep = CharacterVector(0),
+             bool addlKeepsCov=false,
+             bool addlDropSs = true,
+             bool ssAtDoseTime = true) {
   return as<List>(etTransSexp(wrap(inData), wrap(obj), wrap(addCmt), wrap(dropUnits), wrap(allTimeVar),
-                              wrap(keepDosingOnly), wrap(combineDvid),wrap(keep = CharacterVector(0))));
+                              wrap(keepDosingOnly), wrap(combineDvid),wrap(keep),
+                              wrap(addlKeepsCov), wrap(addlDropSs), wrap(ssAtDoseTime)));
 }
 
 
@@ -903,7 +909,10 @@ SEXP expandPars_(SEXP objectS, SEXP paramsS, SEXP eventsS, SEXP controlS) {
       events = PROTECT(etTrans(as<List>(eventsS), nestObj,
                                (INTEGER(mv[RxMv_flags])[RxMvFlag_hasCmt] == 1),
                                false, false, true, R_NilValue,
-                               control[Rxc_keepF])); pro++;
+                               control[Rxc_keepF], 
+                               control[Rxc_addlKeepsCov],
+                               control[Rxc_addlDropSs],
+                               control[Rxc_ssAtDoseTime])); pro++;
       rxModelsAssign(".nestEvents", events);
       RObject cls = Rf_getAttrib(events, R_ClassSymbol);
       List rxLst = cls.attr(".rxode2.lst");
@@ -1070,13 +1079,19 @@ SEXP expandPars_(SEXP objectS, SEXP paramsS, SEXP eventsS, SEXP controlS) {
       events = PROTECT(etTrans(as<List>(eventsS), nestObj,
                                (INTEGER(mv[RxMv_flags])[RxMvFlag_hasCmt] == 1),
                                false, false, true, R_NilValue,
-                               control[Rxc_keepF])); pro++;
+                               control[Rxc_keepF], 
+                               control[Rxc_addlKeepsCov],
+                               control[Rxc_addlDropSs],
+                               control[Rxc_ssAtDoseTime])); pro++;
       rxModelsAssign(".nestEvents", events);
     } else if (!Rf_inherits(events, "rxEtTrans")){
       events = PROTECT(etTrans(as<List>(events), nestObj,
                                (INTEGER(mv[RxMv_flags])[RxMvFlag_hasCmt] == 1),
                                false, false, true, R_NilValue,
-                               control[Rxc_keepF])); pro++;
+                               control[Rxc_keepF], 
+                               control[Rxc_addlKeepsCov],
+                               control[Rxc_addlDropSs],
+                               control[Rxc_ssAtDoseTime])); pro++;
       rxModelsAssign(".nestEvents", events);
     }
     int nobs =  Rf_length(VECTOR_ELT(events, 0));
