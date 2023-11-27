@@ -61,7 +61,7 @@ dfWishart <- function(omega, n, rse, upper, totN=1000, diag=TRUE, seed=1234) {
   .lower <- .d[1] + 3.1
   .upper <-  upper
   rxWithSeed(seed, {
-    uniroot(dfWishartCalcRse, lower=.lower, upper=.upper, omega=omega, totN=totN, rse=rse, diag=diag)
+    stats::uniroot(dfWishartCalcRse, lower=.lower, upper=.upper, omega=omega, totN=totN, rse=rse, diag=diag)
   })
 }
 #' Swaps the matrix list with a cube

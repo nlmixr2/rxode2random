@@ -30,10 +30,10 @@ it is determined by the number of rows in the input
 \code{omega} matrix of standard deviations}
 
 \item{omegaIsChol}{is an indicator of if the omega matrix is in
-the Cholesky decomposition. This is only used when code{type="invWishart"}}
+the Cholesky decomposition. This is only used when \code{type="invWishart"}}
 
 \item{returnChol}{Return the Cholesky decomposition of the
-covariance matrix sample. This is only used when code{type="invWishart"}}
+covariance matrix sample. This is only used when \code{type="invWishart"}}
 
 \item{type}{The type of covariance posterior that is being
 simulated.  This can be:
