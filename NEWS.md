@@ -1,4 +1,4 @@
-# rxode2random (development version)
+# rxode2random 2.0.12
 
 - Added function `dfWishart` which gives (by simulation) an
   approximation of the degrees of freedom of a Wishart to match a
@@ -6,6 +6,9 @@
 
 - Added function `swapMatListWithCube` which swaps omegaList with
   omegaCube values
+
+- Ensure that the outputs are integers (instead of long integers) as
+  requested by CRAN for some checking functions.
 
 # rxode2random 2.0.11
 

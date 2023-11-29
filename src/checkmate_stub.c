@@ -41,15 +41,15 @@ void qstrict0(SEXP nn, const char *what){
   R_xlen_t pos = find_missing_string(nn);
   if (pos > 0) {
     UNPROTECT(1);
-    Rf_errorcall(R_NilValue, "Must have %s, but is NA at position %i", what, pos);
+    Rf_errorcall(R_NilValue, "Must have %s, but is NA at position %i", what, (int)(pos));
   }
   pos = any_duplicated(nn, FALSE);
-  
+
   if (pos > 0) {
     UNPROTECT(1);
-    Rf_errorcall(R_NilValue, "Must have unique %s, but element %i is duplicated", what, pos);
+    Rf_errorcall(R_NilValue, "Must have unique %s, but element %i is duplicated", what, (int)(pos));
   }
-  
+
   if (isNull(nn)) {
     UNPROTECT(1);
     Rf_errorcall(R_NilValue, "Must have %s", what);
@@ -57,12 +57,12 @@ void qstrict0(SEXP nn, const char *what){
   pos = any_duplicated(nn, FALSE);
   if (pos > 0){
     UNPROTECT(1);
-    Rf_errorcall(R_NilValue, "Must have unique %s, but element %i is duplicated", what, pos);
+    Rf_errorcall(R_NilValue, "Must have unique %s, but element %i is duplicated", what, (int)(pos));
   }
   pos = check_strict_names(nn);
   if (pos > 0){
     UNPROTECT(1);
-    Rf_errorcall(R_NilValue, "Must have %s according to R's variable naming conventions, but element %i does not comply", what, pos);
+    Rf_errorcall(R_NilValue, "Must have %s according to R's variable naming conventions, but element %i does not comply", what, (int)(pos));
   }
   UNPROTECT(1);
 }

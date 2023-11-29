@@ -9,7 +9,7 @@
 #' `rxnorm` simulates using the threefry sitmo generator;
 #'
 #' @return normal random number deviates
-#' 
+#'
 #' @importFrom Rcpp sourceCpp
 #' @importFrom stats setNames
 #' @useDynLib rxode2random, .registration=TRUE
@@ -69,7 +69,7 @@ rxpois <- function(lambda, n = 1L, ncores = 1L) {
 #' rxt(df = 3, n = 10, ncores = 2) # You can parallelize the simulation using openMP
 #'
 #' rxt(4) ## The first argument is the df parameter
-#' 
+#'
 #' @export
 rxt <- function(df, n = 1L, ncores = 1L) {
   checkmate::assertNumeric(df, len = 1, lower = 0)
@@ -94,7 +94,7 @@ rxt <- function(df, n = 1L, ncores = 1L) {
 #' rxunif(min = 0, max = 4, n = 10, ncores = 2) # You can parallelize the simulation using openMP
 #'
 #' rxunif()
-#' 
+#'
 #' @export
 rxunif <- function(min = 0, max = 1, n = 1L, ncores = 1L) {
   checkmate::assertNumeric(min, len = 1)
@@ -708,10 +708,10 @@ rxRmvn <- function(n, mu = NULL, sigma, lower = -Inf, upper = Inf, ncores = 1, i
 #'     `omega` matrix of standard deviations
 #'
 #' @param omegaIsChol is an indicator of if the omega matrix is in
-#'   the Cholesky decomposition. This is only used when code{type="invWishart"}
+#'   the Cholesky decomposition. This is only used when \code{type="invWishart"}
 #'
 #' @param returnChol Return the Cholesky decomposition of the
-#'   covariance matrix sample. This is only used when code{type="invWishart"}
+#'   covariance matrix sample. This is only used when \code{type="invWishart"}
 #'
 #' @param diagXformType Diagonal transformation type.  These could be:
 #'
@@ -1039,11 +1039,11 @@ rxWithPreserveSeed <- function(code) {
 #'
 #' @return md5 hash of rxode2random revision
 #' @author Matthew L. Fidler
-#' @export 
+#' @export
 #' @examples
 #' rxode2randomMd5()
 rxode2randomMd5 <- function() {
-  rxode2random.md5  
+  rxode2random.md5
 }
 
 
@@ -1072,13 +1072,13 @@ rxode2randomMd5 <- function() {
 
 #' Expand parameters
 #'
-#'  
+#'
 #' @param object rxode2 model variables object
 #' @param params parameters to expand
 #' @param events event table to help with the expansion
 #' @param control control structure to help with the parameter generation
 #' @return Expanded parameters for simulation
-#' @export 
+#' @export
 #' @author Matthew L. Fidler
 #' @keywords internal
 .expandPars <- function(object, params, events, control) {
