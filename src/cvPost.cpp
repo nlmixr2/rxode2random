@@ -228,14 +228,14 @@ NumericMatrix cvPost0(double nu, NumericMatrix omega, bool omegaIsChol = false,
 //' Scaled Inverse Chi Squared distribution
 //'
 //' @param n Number of random samples
-//' 
+//'
 //' @param nu degrees of freedom of inverse chi square
-//' 
-//' @param scale  Scale of inverse chi squared distribution 
+//'
+//' @param scale  Scale of inverse chi squared distribution
 //'         (default is 1).
-//' 
+//'
 //' @return a vector of inverse chi squared deviates.
-//' 
+//'
 //' @examples
 //' rinvchisq(3, 4, 1) ## Scale = 1, degrees of freedom = 4
 //' rinvchisq(2, 4, 2) ## Scale = 2, degrees of freedom = 4
@@ -271,16 +271,16 @@ void rgbeta(int d, double shape, double* out){
 //' One correlation sample from the LKJ distribution
 //'
 //' @param d The dimension of the correlation matrix
-//' 
+//'
 //' @param eta The scaling parameter of the LKJ distribution.
 //'   Must be > 1.  Also related to the degrees of freedom nu.
 //'   eta = (nu-1)/2.
-//' 
+//'
 //' @param cholesky boolean; If `TRUE` return the cholesky
 //'   decomposition.
 //'
 //' @return A correlation sample from the LKJ distribution
-//' 
+//'
 //' @author Matthew Fidler (translated to RcppArmadillo) and Emma Schwager
 //' @export
 //' @keywords internal
@@ -350,13 +350,13 @@ arma::mat rLKJcvLsd1(arma::vec logSd, arma::vec logSdSD, double eta = 1.0){
 //' random covariate to a correlation.
 //'
 //' @inheritParams rLKJ1
-//' 
+//'
 //' @param nu Degrees of freedom of the Wishart distribution
-//' 
+//'
 //' @inheritParams cvPost
 //'
 //' @return One correlation sample from the inverse wishart
-//' 
+//'
 //' @author Matthew Fidler
 //' @keywords internal
 //' @export
@@ -608,7 +608,7 @@ SEXP cvPost_(SEXP nuS, SEXP omegaS, SEXP nS, SEXP omegaIsCholS,
         arma::mat om0 = as<arma::mat>(omega);
         om0 = om0.t();
         List ret(om0.n_cols);
-        if (n != 1) Rf_warningcall(R_NilValue, _("'n' is determined by the 'omega' argument which contains the simulated standard deviations"));
+        if (n != 1) Rf_warningcall(R_NilValue, "%s", _("'n' is determined by the 'omega' argument which contains the simulated standard deviations"));
         for (unsigned int i = 0; i < om0.n_cols; i++){
           arma::vec sd = om0.col(i);
           if (nu < 3){
@@ -721,7 +721,7 @@ SEXP expandTheta_(SEXP thetaS, SEXP thetaMatS,
   }
   // Theta and thetaMat are correct, assign ".theta"
   rxModelsAssign(".theta", thetaMatS);
-  
+
   qassertS(nCoresRVS, "X1[1,)", "nCoresRV");
   NumericMatrix retNM = rxRmvnSEXP(nStudS, as<SEXP>(theta), as<SEXP>(thetaMat),
                                    thetaLowerS, thetaUpperS, nCoresRVS,
@@ -827,7 +827,7 @@ SEXP expandPars_(SEXP objectS, SEXP paramsS, SEXP eventsS, SEXP controlS) {
     }
     SEXP omegaPre = PROTECT(wrap(omega)); pro++;
     Rf_setAttrib(omegaPre, R_DimNamesSymbol, as<SEXP>(dimnames));
-    
+
     // Convert to a lotri matrix
     omegaLotri = PROTECT(asLotriMat(omegaPre,
                                     as<SEXP>(List::create(_["lower"] = control[Rxc_omegaLower],
@@ -848,7 +848,7 @@ SEXP expandPars_(SEXP objectS, SEXP paramsS, SEXP eventsS, SEXP controlS) {
   SEXP lotriAbove = R_NilValue,
     lotriBelow = R_NilValue;
   int nid = 1;
-  List ni;    
+  List ni;
   CharacterVector allNames;
   std::string methodStr;
   int methodInt = 1;
@@ -909,7 +909,7 @@ SEXP expandPars_(SEXP objectS, SEXP paramsS, SEXP eventsS, SEXP controlS) {
       events = PROTECT(etTrans(as<List>(eventsS), nestObj,
                                (INTEGER(mv[RxMv_flags])[RxMvFlag_hasCmt] == 1),
                                false, false, true, R_NilValue,
-                               control[Rxc_keepF], 
+                               control[Rxc_keepF],
                                control[Rxc_addlKeepsCov],
                                control[Rxc_addlDropSs],
                                control[Rxc_ssAtDoseTime])); pro++;
@@ -954,10 +954,10 @@ SEXP expandPars_(SEXP objectS, SEXP paramsS, SEXP eventsS, SEXP controlS) {
       List bounds = PROTECT(lotriGetBounds(lotriAbove, R_NilValue, R_NilValue)); pro++;
       NumericVector upper = bounds[0];
       NumericVector lower = bounds[1];
-      // With 
+      // With
            NumericMatrix aboveMat = rxRmvnSEXP(IntegerVector::create(1),
                                                R_NilValue, thetaList,
-                                               upper, lower, // lower upper 
+                                               upper, lower, // lower upper
                                                control[Rxc_nCoresRV],
                                                LogicalVector::create(false), // isChol
                                                LogicalVector::create(true), // keepNames
@@ -1010,7 +1010,7 @@ SEXP expandPars_(SEXP objectS, SEXP paramsS, SEXP eventsS, SEXP controlS) {
       NumericVector lower = bounds[1];
       NumericMatrix belowMat = rxRmvnSEXP(IntegerVector::create(nSub),
                                           R_NilValue, omegaList,
-                                          upper, lower, // lower upper 
+                                          upper, lower, // lower upper
                                           control[Rxc_nCoresRV],
                                           LogicalVector::create(false), // isChol
                                           LogicalVector::create(true), // keepNames
@@ -1079,7 +1079,7 @@ SEXP expandPars_(SEXP objectS, SEXP paramsS, SEXP eventsS, SEXP controlS) {
       events = PROTECT(etTrans(as<List>(eventsS), nestObj,
                                (INTEGER(mv[RxMv_flags])[RxMvFlag_hasCmt] == 1),
                                false, false, true, R_NilValue,
-                               control[Rxc_keepF], 
+                               control[Rxc_keepF],
                                control[Rxc_addlKeepsCov],
                                control[Rxc_addlDropSs],
                                control[Rxc_ssAtDoseTime])); pro++;
@@ -1088,7 +1088,7 @@ SEXP expandPars_(SEXP objectS, SEXP paramsS, SEXP eventsS, SEXP controlS) {
       events = PROTECT(etTrans(as<List>(events), nestObj,
                                (INTEGER(mv[RxMv_flags])[RxMvFlag_hasCmt] == 1),
                                false, false, true, R_NilValue,
-                               control[Rxc_keepF], 
+                               control[Rxc_keepF],
                                control[Rxc_addlKeepsCov],
                                control[Rxc_addlDropSs],
                                control[Rxc_ssAtDoseTime])); pro++;
@@ -1105,7 +1105,7 @@ SEXP expandPars_(SEXP objectS, SEXP paramsS, SEXP eventsS, SEXP controlS) {
     NumericVector upper = bounds[0];
     NumericVector lower = bounds[1];
     SEXP sigmaMat = rxRmvnSEXP(n2, R_NilValue, sigmaList,
-                               upper, lower, // lower upper 
+                               upper, lower, // lower upper
                                control[Rxc_nCoresRV],
                                LogicalVector::create(false), // isChol
                                LogicalVector::create(true), // keepNames

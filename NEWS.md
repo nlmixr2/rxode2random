@@ -1,5 +1,7 @@
 # rxode2random (development version)
 
+- Fixed formatting issues (as requested by CRAN and identified on `m1mac`)
+
 # rxode2random 2.0.12
 
 - Added function `dfWishart` which gives (by simulation) an
