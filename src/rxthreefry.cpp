@@ -31,7 +31,7 @@ extern "C" {
   typedef SEXP (*getUpperVec_t)(int type, rx_solve* rx);
   typedef SEXP (*getArmaMat_t)(int type, int csim, rx_solve* rx);
 
-  
+
   getLowerVec_t getLowerVecSexp;
   getUpperVec_t getUpperVecSexp;
   getArmaMat_t getArmaMatSexp;
@@ -43,7 +43,7 @@ arma::vec getLowerVec(int type, rx_solve* rx) {
 }
 arma::vec getUpperVec(int type, rx_solve* rx) {
   return as<arma::vec>(getUpperVecSexp(type, rx));
-  
+
 }
 arma::mat getArmaMat(int type, int csim, rx_solve* rx) {
   return as<arma::mat>(getArmaMatSexp(type, csim, rx));
@@ -703,7 +703,7 @@ arma::mat mvrandn(arma::vec lin, arma::vec uin, arma::mat Sig, int n,
   arma::vec D=Lfull.diag();
   arma::uvec perm=outC.perm;
   if (any(D < 1e-10)){
-    Rf_warningcall(R_NilValue, _("truncated multivariate normal may fail as covariance matrix is singular"));
+    Rf_warningcall(R_NilValue, "%s", _("truncated multivariate normal may fail as covariance matrix is singular"));
   }
   // rescale
   arma::mat L=Lfull.each_col()/D;
@@ -740,7 +740,7 @@ arma::mat mvrandn(arma::vec lin, arma::vec uin, arma::mat Sig, int n,
     }
     iter++;
     if (iter == 1e3){
-      Rf_warningcall(R_NilValue, _("acceptance probability smaller than 0.001"));
+      Rf_warningcall(R_NilValue, "%s", _("acceptance probability smaller than 0.001"));
     } else if (iter> 1e4){
       if (accepted == 0) {
 	stop(_("could not sample from truncated normal"));

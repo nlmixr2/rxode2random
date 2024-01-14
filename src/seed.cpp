@@ -23,7 +23,7 @@ uint32_t rxSeed = 0;
 extern "C" SEXP _rxode2random_rxSetSeed(SEXP intIn) {
   int type = TYPEOF(intIn);
   if (Rf_length(intIn) != 1) {
-    Rf_errorcall(R_NilValue, _("'seed' must be an integer of length 1"));
+    Rf_errorcall(R_NilValue, "%s", _("'seed' must be an integer of length 1"));
   }
   if (type == REALSXP) {
     double in = REAL(intIn)[0];
@@ -44,7 +44,7 @@ extern "C" SEXP _rxode2random_rxSetSeed(SEXP intIn) {
       useRxSeed = true;
     }
   } else {
-    Rf_errorcall(R_NilValue, _("'seed' must be an integer of length 1"));
+    Rf_errorcall(R_NilValue, "%s", _("'seed' must be an integer of length 1"));
   }
   return R_NilValue;
 }

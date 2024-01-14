@@ -1,3 +1,3 @@
 # Submission
 
-- This fixes the arguments in init.c for the LTO issue identified in CRAN (thank you)
+- This fixes the formatting issues identified by CRAN for `m1mac`
