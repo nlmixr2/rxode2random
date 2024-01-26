@@ -1,4 +1,4 @@
-# rxode2random (development version)
+# rxode2random 2.0.13
 
 - Fixed formatting issues (as requested by CRAN and identified on `m1mac`)
 
