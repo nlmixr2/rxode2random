@@ -951,7 +951,7 @@ cvPost <- function(nu, omega, n = 1L, omegaIsChol = FALSE, returnChol = FALSE,
 #' @references
 #'
 #' JD Cook. (2016). Random number generator seed mistakes.
-#' \url{https://tinyurl.com/m62v3kv9}
+#' \url{https://www.johndcook.com/blog/2016/01/29/random-number-generator-seed-mistakes/}
 #'
 #' @export
 rxSetSeed <- function(seed) {
