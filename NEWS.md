@@ -1,3 +1,12 @@
+# rxode2random 2.1.0
+
+- **Breaking Change** changed distributions from the standard C++
+  `<random>` to `boost::random`.  Since this is not dependent on the
+  compiler, it makes the random numbers generated from Mac, Windows
+  and Linux the same for every distribution.  Unfortunately with a new
+  random number transformation, the simulation results will likely be
+  different than they were before
+
 # rxode2random 2.0.13
 
 - Fixed formatting issues (as requested by CRAN and identified on `m1mac`)
