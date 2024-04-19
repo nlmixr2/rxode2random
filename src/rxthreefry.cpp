@@ -24,7 +24,6 @@ using namespace arma;
 #include "../inst/include/rxode2random_fillVec.h"
 
 #include <boost/random/normal_distribution.hpp>
-#include <boost/random/uniform_real_distribution.hpp>
 #include <boost/random/negative_binomial_distribution.hpp>
 #include <boost/random/binomial_distribution.hpp>
 #include <boost/random/cauchy_distribution.hpp>
@@ -237,7 +236,7 @@ double ntail(double l, double u, sitmo::threefry& eng){
   // l and u are column vectors;
   //  uses acceptance-rejection from Rayleigh distr;
   // method due to Marsaglia (1964);
-  boost::random::uniform_real_distribution<> unif(0.0, 1.0);
+  std::uniform_real_distribution<> unif(0.0, 1.0);
   double c=l*l/2.0;
   double f = expm1(c-u*u/2.0);
   double x =0.0;
@@ -264,7 +263,7 @@ double tn(double l, double u, sitmo::threefry& eng, double tol = 2.05){
   // # threshold can be tuned for maximum speed for each platform
   // case: abs(u-l)>tol, uses accept-reject from randn
   boost::random::normal_distribution<> rnorm(0.0, 1.0);
-  boost::random::uniform_real_distribution<> runif(0.0, 1.0);
+  std::uniform_real_distribution<> runif(0.0, 1.0);
   double x=0;
   if (fabs(u - l) > tol){
     x = rnorm(eng);
@@ -352,7 +351,7 @@ rx_mvnrnd mvnrnd(int n, arma::mat& L, arma::vec& l,
   arma::mat Z(d, n, arma::fill::zeros); // create array for variables
   arma::vec p(n, arma::fill::zeros);
   arma::vec uu(n, arma::fill::zeros);
-  boost::random::uniform_real_distribution<> unif(0.0, 1.0);
+  std::uniform_real_distribution<> unif(0.0, 1.0);
   for (int k = 0; k < d; ++k){
     //# compute matrix multiplication L*Z
     arma::vec col=trans(L(k,arma::span(0,k)) * Z.rows(0, k));
@@ -1409,7 +1408,7 @@ extern "C" double rxunif(rx_solving_options_ind* ind, double low, double hi){
 
 extern "C" double riunif(rx_solving_options_ind* ind, int id, double low, double hi){
   if (ind->isIni == 1) {
-    boost::random::uniform_real_distribution<double> d(low, hi);
+    std::uniform_real_distribution<double> d(low, hi);
     ind->simIni[id] = d(_eng[rx_get_thread(op_global.cores)]);
   }
   return ind->simIni[id];
@@ -1419,7 +1418,7 @@ extern "C" double riunif(rx_solving_options_ind* ind, int id, double low, double
 NumericVector rxunif_(double low, double hi, int n, int ncores){
   NumericVector ret(n);
   int n2 = ret.size();
-  boost::random::uniform_real_distribution<double> d(low, hi);
+  std::uniform_real_distribution<double> d(low, hi);
   double *retD = ret.begin();
 
 #ifdef _OPENMP
@@ -1811,7 +1810,7 @@ NumericVector rpp_(SEXP nS, SEXP lambdaS, SEXP gammaS, SEXP probS, SEXP t0S, SEX
       } else {
 	int cur = 0;
 	NumericVector ret(n);
-	boost::random::uniform_real_distribution<double> runif(0.0, 1.0);
+	std::uniform_real_distribution<double> runif(0.0, 1.0);
 	boost::random::exponential_distribution<double> rexp(lambda);
 	double ttest;
 	while (cur != n){
