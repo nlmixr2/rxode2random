@@ -1402,7 +1402,7 @@ NumericVector rxt__(double df, int n, int ncores){
 
 extern "C" double rxunif(rx_solving_options_ind* ind, double low, double hi){
   if (!ind->inLhs) return 0.0;
-  boost::random::uniform_real_distribution<double> d(low, hi);
+  std::uniform_real_distribution<double> d(low, hi);
   return d(_eng[rx_get_thread(op_global.cores)]);
 }
 
