@@ -22,12 +22,12 @@ Imports:
     Rcpp,
     checkmate,
     lotri,
-    rxode2parse (>= 2.0.17)
+    rxode2parse (>= 2.0.19)
 Suggests:
     testthat (>= 3.0.0)
 LinkingTo:
     sitmo,
-    rxode2parse (>= 2.0.17),
+    rxode2parse (>= 2.0.19),
     Rcpp,
     RcppArmadillo,
     BH
