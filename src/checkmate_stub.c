@@ -71,4 +71,5 @@ void qstrict0(SEXP nn, const char *what){
 void qstrict(SEXP x, const char *what) {
   SEXP nn = PROTECT(getAttrib(x, R_NamesSymbol));
   qstrict0(nn, what);
+  UNPROTECT(1);
 }
