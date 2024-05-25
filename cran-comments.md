@@ -1,3 +1,3 @@
 # Submission
 
-- This fixes the formatting issues identified by CRAN for `m1mac`
+- This is an update to support the new version of rxode2parse
