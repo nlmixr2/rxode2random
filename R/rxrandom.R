@@ -792,11 +792,10 @@ rxRmvn <- function(n, mu = NULL, sigma, lower = -Inf, upper = Inf, ncores = 1, i
 #'
 #' Alvarez I, Niemi J and Simpson M. (2014) *Bayesian Inference for a
 #' Covariance Matrix*. Conference on Applied Statistics in Agriculture.
-#' <https://newprairiepress.org/cgi/viewcontent.cgi?article=1004&context=agstatconference>
-#'
 #'
 #' Wang1 Z, Wu Y, and Chu H. (2018) *On Equivalence of the LKJ
-#' distribution and the restricted Wishart distribution*. arXiv:1809.04746
+#' distribution and the restricted Wishart
+#' distribution*. <doi:10.48550/arXiv.1809.047463
 #'
 #' @examples
 #'
