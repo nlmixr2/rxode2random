@@ -873,7 +873,7 @@ SEXP expandPars_(SEXP objectS, SEXP paramsS, SEXP eventsS, SEXP controlS) {
       ni = nestingInfo_(omegaLotri, eventsL);
       IntegerVector idIV =  as<IntegerVector>(ni["id"]);//length(levels(.ni$id))
       nid = Rf_length(Rf_getAttrib(idIV, R_LevelsSymbol));
-      if (nid <= 1){
+      if (nid <= 1) {
       } else if (nSub <= 1) {
         // control[Rxc_nSub] = nid;
         nSub = nid;
@@ -934,11 +934,20 @@ SEXP expandPars_(SEXP objectS, SEXP paramsS, SEXP eventsS, SEXP controlS) {
     methodStr = as<std::string>(control[Rxc_omegaSeparation]);
     methodInt = getMethodInt(methodStr, allNames, et);
 
+    if (Rf_isNull(lotriAbove)) {
+      aboveSEXP = R_NilValue;
+      rxModelsAssign(".nestEvents", events);
+      rxModelsAssign(".nestEta",    R_NilValue);
+      rxModelsAssign(".nestTheta",  R_NilValue);
+    }
+
     if (!Rf_isNull(aboveSEXP)) {
       // Create an extra theta matrix list
       //
       // Note this is for between study variability and the
-      // method/specification comes from omega, so methodInt comes from omegaSeparation
+      // method/specification comes from omega, so methodInt comes from
+      // omegaSeparation
+
       SEXP thetaList = PROTECT(cvPost_(et, lotriAbove,
                                        nStudS,
                                        LogicalVector::create(false),
@@ -955,16 +964,16 @@ SEXP expandPars_(SEXP objectS, SEXP paramsS, SEXP eventsS, SEXP controlS) {
       NumericVector upper = bounds[0];
       NumericVector lower = bounds[1];
       // With
-           NumericMatrix aboveMat = rxRmvnSEXP(IntegerVector::create(1),
-                                               R_NilValue, thetaList,
-                                               upper, lower, // lower upper
-                                               control[Rxc_nCoresRV],
-                                               LogicalVector::create(false), // isChol
-                                               LogicalVector::create(true), // keepNames
-                                               NumericVector::create(0.4), // a
-                                               NumericVector::create(2.05), // tol
-                                               NumericVector::create(1e-10), // nlTol
-                                               IntegerVector::create(100)); // nlMaxiter
+      NumericMatrix aboveMat = rxRmvnSEXP(IntegerVector::create(1),
+                                          R_NilValue, thetaList,
+                                          upper, lower, // lower upper
+                                          control[Rxc_nCoresRV],
+                                          LogicalVector::create(false), // isChol
+                                          LogicalVector::create(true), // keepNames
+                                          NumericVector::create(0.4), // a
+                                          NumericVector::create(2.05), // tol
+                                          NumericVector::create(1e-10), // nlTol
+                                          IntegerVector::create(100)); // nlMaxiter
       DataFrame newLst = as<DataFrame>(aboveMat);
       if (!Rf_isNull(et) && Rf_length(et) != 0){
         CharacterVector etListNames = asCv(Rf_getAttrib(et, R_NamesSymbol), "names(et)");
@@ -989,6 +998,9 @@ SEXP expandPars_(SEXP objectS, SEXP paramsS, SEXP eventsS, SEXP controlS) {
       }
     } else {
       rxModelsAssign(".thetaL", R_NilValue);
+    }
+    if (Rf_isNull(lotriBelow)) {
+      belowSEXP = R_NilValue;
     }
     if (!Rf_isNull(belowSEXP)) {
       // below to sample matrix
